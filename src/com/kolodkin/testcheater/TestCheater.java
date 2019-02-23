@@ -1,4 +1,22 @@
+// This file is part of TestCheater.
+// Copyright (C) 2019 Aleksandr Kolodkin <alexandr.kolodkin@gmail.com>
+//
+// TestCheater is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Foobar is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
 package com.kolodkin.testcheater;
+
+import java.util.prefs.Preferences;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -9,6 +27,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
 
 import javax.swing.UIManager;
 import javax.swing.JFrame;
@@ -17,6 +38,19 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import say.swing.JFontChooser;
 
 public class TestCheater extends javax.swing.JFrame {
 
@@ -25,7 +59,6 @@ public class TestCheater extends javax.swing.JFrame {
      */
     public TestCheater() {
         UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Segoe UI", Font.BOLD, 14));
-        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
         initComponents();
         
@@ -35,6 +68,17 @@ public class TestCheater extends javax.swing.JFrame {
         answers.setModel(answersModel);
         answers.getColumnModel().getColumn(0).setCellRenderer(new WordWrapCellRenderer());
         answers.getColumnModel().getColumn(1).setCellRenderer(new WordWrapCellRenderer());
+        
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        
+        Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
+        Font font = new Font(
+            prefs.get("FontName", "Segoe UI"), 
+            prefs.getInt("FontStyle", Font.BOLD), 
+            prefs.getInt("FontSize", 16)
+        );
+        
+        setCustomFont(font);
         
         connect();        
         updateTestsList();
@@ -62,6 +106,40 @@ public class TestCheater extends javax.swing.JFrame {
         });        
     }
     
+    private void setCustomFont(Font font) {
+        setFont(font);
+        lblAnswers.setFont(font);
+        lblQuery.setFont(font);
+        lblTest.setFont(font);
+        test.setFont(font);
+        query.setFont(font);
+        answers.setFont(font);
+        btnFont.setFont(font);
+        btnClear.setFont(font);
+        jScrollPane2.setFont(font);
+    }
+    
+    private void buzzer() {
+        AudioInputStream ais = null;
+        try {
+            File buzzerFile = new File(getClass().getClassLoader().getResource("com/kolodkin/testcheater/buzzer.wav").getFile());
+            ais = AudioSystem.getAudioInputStream(buzzerFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.setFramePosition(0);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (ais != null) ais.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
     /**
      * Updates the list of tests
      */
@@ -76,8 +154,8 @@ public class TestCheater extends javax.swing.JFrame {
                         comboBoxModel.addElement(rs.getString("name"));
                     }
                 }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
+            } catch (SQLException ex) {
+                Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
         
@@ -92,7 +170,7 @@ public class TestCheater extends javax.swing.JFrame {
         
         while (answersModel.getRowCount() > 0) {
             answersModel.removeRow(0);
-        }
+        }        
         
         if (conn != null) {
             String question = this.query.getText().trim().toUpperCase();
@@ -115,8 +193,8 @@ public class TestCheater extends javax.swing.JFrame {
                             }
                         }
                     }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                } catch (SQLException ex) {
+                    Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else {
                 String SQL = 
@@ -136,11 +214,13 @@ public class TestCheater extends javax.swing.JFrame {
                             }
                         }
                     }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                } catch (SQLException ex) {
+                    Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
         }
+        
+        if (answersModel.getRowCount() == 0) buzzer();
         
         answersModel.fireTableDataChanged();
     }
@@ -152,11 +232,11 @@ public class TestCheater extends javax.swing.JFrame {
     private static Connection conn = null;
     private static void connect() {
         try {
-            String url = "jdbc:sqlite:resources/tests.sqlite"; // db parameters
+            String url = "jdbc:sqlite::resource:com/kolodkin/testcheater/tests.sqlite"; // db parameters
             conn = DriverManager.getConnection(url); // create a connection to the database           
             System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
@@ -177,11 +257,11 @@ public class TestCheater extends javax.swing.JFrame {
         lblAnswers = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         answers = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Test Cheater");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/kolodkin/testcheater/icon.png")));
 
         lblTest.setText("Тест:");
 
@@ -206,10 +286,10 @@ public class TestCheater extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(answers);
 
-        jButton1.setText("Очистить");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Очистить");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
@@ -224,12 +304,12 @@ public class TestCheater extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFont, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblQuery, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                        .addComponent(btnFont))
+                    .addComponent(lblQuery, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(query)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnClear))
                     .addComponent(lblAnswers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -248,11 +328,11 @@ public class TestCheater extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(query, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAnswers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -262,13 +342,29 @@ public class TestCheater extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFontActionPerformed
-        // TODO add your handling code here:
+        JFontChooser dialog = new JFontChooser();
+        dialog.setSelectedFont(btnFont.getFont());
+        if (dialog.showDialog(this) == JFontChooser.OK_OPTION) {
+            try {
+                Font font = dialog.getSelectedFont();
+                setCustomFont(font);
+                
+                Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
+                prefs.put("FontName", font.getFontName());
+                prefs.putInt("FontSize", font.getSize());
+                prefs.putInt("FontStyle", font.getStyle());
+                
+                prefs.flush();
+            } catch (BackingStoreException ex) {
+                Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnFontActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         query.setText("");
         query.requestFocus();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,8 +401,8 @@ public class TestCheater extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable answers;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFont;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnswers;
     private javax.swing.JLabel lblQuery;
