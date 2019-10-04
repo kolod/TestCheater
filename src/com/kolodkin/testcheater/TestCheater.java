@@ -39,16 +39,18 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.BufferedInputStream;
+
+import java.net.URI;
 
 import say.swing.JFontChooser;
 
@@ -103,7 +105,7 @@ public class TestCheater extends javax.swing.JFrame {
         
         test.addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) updateAnswers();
-        });        
+        });
     }
     
     private void setCustomFont(Font font) {
@@ -119,11 +121,13 @@ public class TestCheater extends javax.swing.JFrame {
         jScrollPane2.setFont(font);
     }
     
-    private void buzzer() {
+    private void buzzer() throws URISyntaxException {
         AudioInputStream ais = null;
         try {
-            File buzzerFile = new File(getClass().getClassLoader().getResource("com/kolodkin/testcheater/buzzer.wav").getFile());
-            ais = AudioSystem.getAudioInputStream(buzzerFile);
+            InputStream stream = getClass().getResourceAsStream("buzzer.wav");
+            InputStream bufferedStream = new BufferedInputStream(stream);
+            
+            ais = AudioSystem.getAudioInputStream(bufferedStream);
             Clip clip = AudioSystem.getClip();
             clip.open(ais);
             clip.setFramePosition(0);
@@ -220,7 +224,11 @@ public class TestCheater extends javax.swing.JFrame {
             }
         }
         
-        if (answersModel.getRowCount() == 0) buzzer();
+        if (answersModel.getRowCount() == 0) try {
+            buzzer();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         answersModel.fireTableDataChanged();
     }
@@ -250,7 +258,7 @@ public class TestCheater extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTest = new javax.swing.JLabel();
-        test = new javax.swing.JComboBox<>();
+        test = new javax.swing.JComboBox<String>();
         lblQuery = new javax.swing.JLabel();
         btnFont = new javax.swing.JButton();
         query = new javax.swing.JTextField();
@@ -260,8 +268,13 @@ public class TestCheater extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Test Cheater");
+        setTitle("Test Cheater 04.2019");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/kolodkin/testcheater/icon.png")));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lblTest.setText("Тест:");
 
@@ -327,7 +340,7 @@ public class TestCheater extends javax.swing.JFrame {
                 .addComponent(lblQuery)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(query, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(query, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAnswers)
@@ -365,6 +378,14 @@ public class TestCheater extends javax.swing.JFrame {
         query.setText("");
         query.requestFocus();
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
