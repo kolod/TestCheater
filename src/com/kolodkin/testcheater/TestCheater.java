@@ -38,7 +38,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -49,8 +48,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedInputStream;
-
-import java.net.URI;
 
 import say.swing.JFontChooser;
 
@@ -258,7 +255,7 @@ public class TestCheater extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTest = new javax.swing.JLabel();
-        test = new javax.swing.JComboBox<String>();
+        test = new javax.swing.JComboBox<>();
         lblQuery = new javax.swing.JLabel();
         btnFont = new javax.swing.JButton();
         query = new javax.swing.JTextField();
@@ -268,7 +265,7 @@ public class TestCheater extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Test Cheater 04.2019");
+        setTitle("Test Cheater 06.2021");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/kolodkin/testcheater/icon.png")));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
