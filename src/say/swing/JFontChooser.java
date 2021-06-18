@@ -17,10 +17,25 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.InputMap;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -44,9 +59,9 @@ import javax.swing.text.Position;
  *   	Font font = fontChooser.getSelectedFont(); 
  *   	System.out.println("Selected Font : " + font); 
  *   }
- * <pre>
+ * </pre>
  **/
-public class JFontChooser extends JComponent
+public final class JFontChooser extends JComponent
 {
 	/**
 	 * Return value from <code>showDialog()</code>.
@@ -75,9 +90,9 @@ public class JFontChooser extends JComponent
 		"22", "24", "26", "28", "36", "48", "72",
 	};
 	protected int dialogResultValue = ERROR_OPTION;
-	private ResourceBundle messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
+	private final ResourceBundle messageCatalog = ResourceBundle.getBundle(JFontChooser.class.getName() + "Messages", getLocale());
 
-    protected String msg(String key)
+	protected String msg(String key)
 	{
 		String value = key;
 		try
@@ -112,22 +127,12 @@ public class JFontChooser extends JComponent
 		this(DEFAULT_FONT_SIZE_STRINGS);
 	}
 
-	public JFontChooser(Locale locale) {
-		this(DEFAULT_FONT_SIZE_STRINGS, locale);
-	}
-
 	/**
 	 * Constructs a <code>JFontChooser</code> object using the given font size array.
 	 * @param fontSizeStrings  the array of font size string.
 	 **/
-	public JFontChooser(String[] fontSizeStrings) {
-		this(fontSizeStrings, Locale.getDefault());
-	}
-	public JFontChooser(String[] fontSizeStrings, Locale locale)
+	public JFontChooser(String[] fontSizeStrings)
 	{
-		setLocale(locale);
-		messageCatalog = ResourceBundle.getBundle("i18n/JFontChooser", getLocale());
-
 		if (fontSizeStrings == null)
 		{
 			fontSizeStrings = DEFAULT_FONT_SIZE_STRINGS;
@@ -262,9 +267,9 @@ public class JFontChooser extends JComponent
 	 *          <code>Font.PLAIN</code>, <code>Font.BOLD</code>,
 	 *          <code>Font.ITALIC</code>, <code>Font.BOLD|Font.ITALIC</code>
 	 *
-	 * @see Font#PLAIN
-	 * @see Font#BOLD
-	 * @see Font#ITALIC
+	 * @see java.awt.Font#PLAIN
+	 * @see java.awt.Font#BOLD
+	 * @see java.awt.Font#ITALIC
 	 * @see #setSelectedFontStyle
 	 **/
 	public int getSelectedFontStyle()
@@ -305,7 +310,7 @@ public class JFontChooser extends JComponent
 	 * @return  the selected font
 	 *
 	 * @see #setSelectedFont
-	 * @see Font
+	 * @see java.awt.Font
 	 **/
 	public Font getSelectedFont()
 	{
@@ -318,6 +323,8 @@ public class JFontChooser extends JComponent
 	 * Set the family name of the selected font.
 	 * @param name  the family name of the selected font.
 	 *              This parameter is not allowed null.
+	 *
+	 * @see getSelectedFontFamily
 	 **/
 	public void setSelectedFontFamily(String name)
 	{
@@ -351,9 +358,9 @@ public class JFontChooser extends JComponent
 	 *               <code>Font.ITALIC</code>, or
 	 *               <code>Font.BOLD|Font.ITALIC</code>.
 	 *
-	 * @see Font#PLAIN
-	 * @see Font#BOLD
-	 * @see Font#ITALIC
+	 * @see java.awt.Font#PLAIN
+	 * @see java.awt.Font#BOLD
+	 * @see java.awt.Font#ITALIC
 	 * @see #getSelectedFontStyle
 	 **/
 	public void setSelectedFontStyle(int style)
@@ -395,7 +402,7 @@ public class JFontChooser extends JComponent
 	 * @param font the selected font
 	 *
 	 * @see #getSelectedFont
-	 * @see Font
+	 * @see java.awt.Font
 	 **/
 	public void setSelectedFont(Font font)
 	{
@@ -424,6 +431,7 @@ public class JFontChooser extends JComponent
 		JDialog dialog = createDialog(parent);
 		dialog.addWindowListener(new WindowAdapter()
 		{
+                        @Override
 			public void windowClosing(WindowEvent e)
 			{
 				dialogResultValue = CANCEL_OPTION;
@@ -438,13 +446,14 @@ public class JFontChooser extends JComponent
 
 	protected class ListSelectionHandler implements ListSelectionListener
 	{
-		private JTextComponent textComponent;
+		private final JTextComponent textComponent;
 
 		ListSelectionHandler(JTextComponent textComponent)
 		{
 			this.textComponent = textComponent;
 		}
 
+                @Override
 		public void valueChanged(ListSelectionEvent e)
 		{
 			if (e.getValueIsAdjusting() == false)
@@ -467,18 +476,20 @@ public class JFontChooser extends JComponent
 
 	protected class TextFieldFocusHandlerForTextSelection extends FocusAdapter
 	{
-		private JTextComponent textComponent;
+		private final JTextComponent textComponent;
 
 		public TextFieldFocusHandlerForTextSelection(JTextComponent textComponent)
 		{
 			this.textComponent = textComponent;
 		}
 
+                @Override
 		public void focusGained(FocusEvent e)
 		{
 			textComponent.selectAll();
 		}
 
+                @Override
 		public void focusLost(FocusEvent e)
 		{
 			textComponent.select(0, 0);
@@ -488,16 +499,17 @@ public class JFontChooser extends JComponent
 
 	protected class TextFieldKeyHandlerForListSelectionUpDown extends KeyAdapter
 	{
-		private JList targetList;
+		private final JList targetList;
 
 		public TextFieldKeyHandlerForListSelectionUpDown(JList list)
 		{
 			this.targetList = list;
 		}
 
+                @Override
 		public void keyPressed(KeyEvent e)
 		{
-			int i = targetList.getSelectedIndex();
+			int i;
 			switch (e.getKeyCode())
 			{
 				case KeyEvent.VK_UP:
@@ -532,16 +544,19 @@ public class JFontChooser extends JComponent
 			this.targetList = targetList;
 		}
 
+                @Override
 		public void insertUpdate(DocumentEvent e)
 		{
 			update(e);
 		}
 
+                @Override
 		public void removeUpdate(DocumentEvent e)
 		{
 			update(e);
 		}
 
+                @Override
 		public void changedUpdate(DocumentEvent e)
 		{
 			update(e);
@@ -557,7 +572,7 @@ public class JFontChooser extends JComponent
 			}
 			catch (BadLocationException e)
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 			if (newValue.length() > 0)
@@ -582,13 +597,14 @@ public class JFontChooser extends JComponent
 
 		public class ListSelector implements Runnable
 		{
-			private int index;
+			private final int index;
 
 			public ListSelector(int index)
 			{
 				this.index = index;
 			}
 
+                        @Override
 			public void run()
 			{
 				targetList.setSelectedIndex(this.index);
@@ -596,10 +612,10 @@ public class JFontChooser extends JComponent
 		}
 	}
 
-	protected class DialogOKAction extends AbstractAction
+	protected final class DialogOKAction extends AbstractAction
 	{
 		protected static final String ACTION_NAME = "OK";
-		private JDialog dialog;
+		private final JDialog dialog;
 
 		protected DialogOKAction(JDialog dialog)
 		{
@@ -609,6 +625,7 @@ public class JFontChooser extends JComponent
 			putValue(Action.NAME, msg(ACTION_NAME));
 		}
 
+                @Override
 		public void actionPerformed(ActionEvent e)
 		{
 			dialogResultValue = OK_OPTION;
@@ -616,10 +633,10 @@ public class JFontChooser extends JComponent
 		}
 	}
 
-	protected class DialogCancelAction extends AbstractAction
+	protected final class DialogCancelAction extends AbstractAction
 	{
 		protected static final String ACTION_NAME = "Cancel";
-		private JDialog dialog;
+		private final JDialog dialog;
 
 		protected DialogCancelAction(JDialog dialog)
 		{
@@ -629,6 +646,7 @@ public class JFontChooser extends JComponent
 			putValue(Action.NAME, msg(ACTION_NAME));
 		}
 
+                @Override
 		public void actionPerformed(ActionEvent e)
 		{
 			dialogResultValue = CANCEL_OPTION;
@@ -775,8 +793,7 @@ public class JFontChooser extends JComponent
 	{
 		if (samplePanel == null)
 		{
-			Border titledBorder = BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(), msg("Sample"));
+			Border titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), msg("Sample"));
 			Border empty = BorderFactory.createEmptyBorder(5, 10, 10, 10);
 			Border border = BorderFactory.createCompoundBorder(titledBorder, empty);
 

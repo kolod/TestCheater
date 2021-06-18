@@ -48,10 +48,24 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedInputStream;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import say.swing.JFontChooser;
 
-public class TestCheater extends javax.swing.JFrame {
+public final class TestCheater extends javax.swing.JFrame {
+    
+    private final ResourceBundle messageCatalog = ResourceBundle.getBundle(TestCheater.class.getName() + "Messages", getLocale());
+    
+    protected String msg(String key) {
+	String value = key;
+	try {
+            value = messageCatalog.getString(key);
+	} catch (MissingResourceException ex) {
+            Logger.getLogger(TestCheater.class.getName()).log(Level.SEVERE, "Message: '" + key + "' not found.", ex);
+        }
+	return value;
+    }
 
     /**
      * Creates new form TestCheater
@@ -265,7 +279,7 @@ public class TestCheater extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Test Cheater 06.2021");
+        setTitle("Test Cheater "+msg("Version")); // NOI18N
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/kolodkin/testcheater/icon.png")));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -273,18 +287,18 @@ public class TestCheater extends javax.swing.JFrame {
             }
         });
 
-        lblTest.setText("Тест:");
+        lblTest.setText(msg("Test")); // NOI18N
 
-        lblQuery.setText("Поиск вопроса (можно использовать % и _):");
+        lblQuery.setText(msg("Search")); // NOI18N
 
-        btnFont.setText("Шрифт");
+        btnFont.setText(msg("Font")); // NOI18N
         btnFont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFontActionPerformed(evt);
             }
         });
 
-        lblAnswers.setText("Ответы:");
+        lblAnswers.setText(msg("Answers")); // NOI18N
 
         answers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,7 +310,7 @@ public class TestCheater extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(answers);
 
-        btnClear.setText("Очистить");
+        btnClear.setText(msg("Clean")); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
