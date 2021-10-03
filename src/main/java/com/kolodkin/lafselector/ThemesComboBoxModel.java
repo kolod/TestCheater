@@ -33,15 +33,14 @@ public class ThemesComboBoxModel extends AbstractListModel<ThemeInfo> implements
         lastModifiedMap = new HashMap<>();        
         themes.addAll(loadCoreThemes());
         themes.addAll(loadBundledThemes());
-        themes.addAll(loadThemesFromDirectory());
     }
 
     private List<ThemeInfo> loadCoreThemes() {
         List<ThemeInfo> coreThemes = new ArrayList<>();
-        coreThemes.add(new ThemeInfo("Flat Light", null, false, null, FlatLightLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat Dark", null, true, null, FlatDarkLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat IntelliJ", null, false, null, FlatIntelliJLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat Darcula", null, true, null, FlatDarculaLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Light", null, FlatLightLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Dark", null, FlatDarkLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat IntelliJ", null, FlatIntelliJLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Darcula", null, FlatDarculaLaf.class.getName()));
         coreThemes.sort(comparator);
         return coreThemes;
     }
@@ -63,43 +62,12 @@ public class ThemesComboBoxModel extends AbstractListModel<ThemeInfo> implements
             String resourceName = e.getKey();
             Map<String, String> value = (Map<String, String>) e.getValue();
             String name = value.get("name");
-            boolean dark = Boolean.parseBoolean(value.get("dark"));
-            bundledThemes.add(new ThemeInfo(name, resourceName, dark, null, null));
+            bundledThemes.add(new ThemeInfo(name, resourceName, null));
         });
 
+        logger.info("" + bundledThemes.size() + " bundled themes loaded.");
         bundledThemes.sort(comparator);
         return bundledThemes;
-    }
-
-    private List<ThemeInfo> loadThemesFromDirectory() {
-        List<ThemeInfo> moreThemes = new ArrayList<>();
-
-        // get current working directory
-        File directory = new File("").getAbsoluteFile();
-
-        File[] themeFiles = directory.listFiles((dir, name) -> {
-            return name.endsWith(".theme.json") || name.endsWith(".properties");
-        });
-
-        if (themeFiles == null) {
-            return moreThemes;
-        }
-
-        lastModifiedMap.clear();
-        lastModifiedMap.put(directory, directory.lastModified());
-
-        moreThemes.clear();
-        for (File f : themeFiles) {
-            String fname = f.getName();
-            String name = fname.endsWith(".properties")
-                    ? StringUtils.removeTrailing(fname, ".properties")
-                    : StringUtils.removeTrailing(fname, ".theme.json");
-            moreThemes.add(new ThemeInfo(name, null, false, f, null));
-            lastModifiedMap.put(f, f.lastModified());
-        }
-
-        moreThemes.sort(comparator);
-        return moreThemes;
     }
 
     boolean hasThemesFromDirectoryChanged() {

@@ -1,11 +1,8 @@
 package com.kolodkin.lafselector;
 
-import com.formdev.flatlaf.*;
-import com.formdev.flatlaf.extras.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.beans.*;
-import java.io.FileInputStream;
-import java.io.IOException;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import org.apache.logging.log4j.LogManager;
@@ -30,46 +27,11 @@ public class ThemesComboBox extends JComboBox<ThemeInfo> {
             }
         });
 
-        addActionListener(e -> {
-
+        addActionListener((ActionEvent e) -> {
             Object obj = getSelectedItem();
             if (obj instanceof ThemeInfo) {
-                ThemeInfo themeInfo = (ThemeInfo) obj;
-                if (themeInfo.ñlassName != null) {
-                    if (!themeInfo.ñlassName.equals(UIManager.getLookAndFeel().getClass().getName())) {
-                        FlatAnimatedLafChange.showSnapshot();
-                        try {
-                            UIManager.setLookAndFeel(themeInfo.ñlassName);
-                        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-                            logger.error("Failed to create '" + themeInfo.ñlassName + "'.", ex);
-                        }
-                    }
-                } else if (themeInfo.themeFile != null) {
-                    FlatAnimatedLafChange.showSnapshot();
-                    try {
-                        if (themeInfo.themeFile.getName().endsWith(".properties")) {
-                            FlatLaf.setup(new FlatPropertiesLaf(themeInfo.name, themeInfo.themeFile));
-                        } else {
-                            FlatLaf.setup(IntelliJTheme.createLaf(new FileInputStream(themeInfo.themeFile)));
-                        }
-
-                        //DemoPrefs.getState().put(DemoPrefs.KEY_LAF_THEME, DemoPrefs.FILE_PREFIX + themeInfo.themeFile);
-                    } catch (IOException ex) {
-                        logger.error("Failed to load '" + themeInfo.themeFile + "'.", ex);
-                    }
-
-                } else {
-                    FlatAnimatedLafChange.showSnapshot();
-
-                    IntelliJTheme.setup(getClass().getResourceAsStream(THEMES_PACKAGE + themeInfo.resourceName));
-                    //DemoPrefs.getState().put( DemoPrefs.KEY_LAF_THEME, DemoPrefs.RESOURCE_PREFIX + themeInfo.resourceName );
-
-                }
+                ((ThemeInfo) obj).apply();
             }
-
-            // update all components
-            FlatLaf.updateUI();
-            FlatAnimatedLafChange.hideSnapshotWithAnimation();
         });
     }
 

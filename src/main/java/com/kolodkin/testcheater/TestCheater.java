@@ -58,6 +58,14 @@ public class TestCheater extends javax.swing.JFrame {
     public TestCheater() {
         Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
         ResourceBundle bundle = ResourceBundle.getBundle("i18n/TestCheater");
+        
+        // Restore theme
+        try {
+            ThemeInfo themeInfo = new ThemeInfo(prefs.get("theme", ""));
+            themeInfo.apply();
+        } catch (IllegalArgumentException ex) {
+            logger.error(ex.getMessage(), ex);
+        }
 
         // Restore font
         setCustomFont(new Font(
@@ -99,6 +107,15 @@ public class TestCheater extends javax.swing.JFrame {
                 }
             }
         });
+        
+        theme.addActionListener(e -> {
+            Object obj = theme.getSelectedItem();
+            if (obj instanceof ThemeInfo) {
+                ThemeInfo t = (ThemeInfo) obj;
+                String s = t.toString();
+                prefs.put("theme", s);
+            }
+        });
 
         test.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -106,25 +123,29 @@ public class TestCheater extends javax.swing.JFrame {
             }
         });
 
-        btnClear.addActionListener(e -> {
-            query.setText("");
-            query.requestFocus();
-        });
+        Action clearAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                query.setText("");
+                query.requestFocus();
+            }
+        };
 
-        btnFont.addActionListener(e -> {
+        btnClear.addActionListener(clearAction);
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(112, 0, false), "Clear");
+        getRootPane().getActionMap().put("Clear", clearAction);
+
+        btnFont.addActionListener((ActionEvent e) -> {
             FontDialog dialog = new FontDialog(this, bundle.getString("title_choose_font"), true);
             dialog.setSelectedFont(btnFont.getFont());
             dialog.setVisible(true);
             if (!dialog.isCancelSelected()) {
                 try {
-                    Font newFont = dialog.getSelectedFont();
-                    setCustomFont(newFont);
-
-                    //Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
-                    prefs.put("FontName", newFont.getFontName());
-                    prefs.putInt("FontSize", newFont.getSize());
-                    prefs.putInt("FontStyle", newFont.getStyle());
-
+                    Font font = dialog.getSelectedFont();
+                    setCustomFont(font);
+                    prefs.put("FontName", font.getFontName());
+                    prefs.putInt("FontSize", font.getSize());
+                    prefs.putInt("FontStyle", font.getStyle());
                     prefs.flush();
                 } catch (BackingStoreException ex) {
                     logger.catching(ex);
@@ -287,7 +308,7 @@ public class TestCheater extends javax.swing.JFrame {
             logger.error(ex.getMessage(), ex);
         }
     }
-    
+
     private void setRussianKeyboardLayout() {
         this.getInputContext().selectInputMethod(new Locale("ru", "RU"));
     }
