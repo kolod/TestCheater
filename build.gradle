@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+mainClassName = 'com.kolodkin.testcheater.TestCheater'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    implementation 'org.drjekyll:fontchooser:2.4'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+    implementation 'com.formdev:flatlaf:1.6'
+    implementation 'com.formdev:flatlaf-extras:1.6'
+    implementation 'com.formdev:flatlaf-intellij-themes:1.6'
+    testImplementation 'junit:junit:4.13'
+}
+
+shadowJar {
+    manifest {
+        attributes (
+            'Multi-Release': 'true'
+        )
+    }
+}
