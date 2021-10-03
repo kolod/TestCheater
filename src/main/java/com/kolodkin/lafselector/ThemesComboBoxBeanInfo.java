@@ -10,12 +10,12 @@ import java.beans.*;
  *
  * @author alexa
  */
-public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
+public class ThemesComboBoxBeanInfo extends SimpleBeanInfo {
 
     // Bean descriptor//GEN-FIRST:BeanDescriptor
     /*lazy BeanDescriptor*/
     private static BeanDescriptor getBdescriptor(){
-        BeanDescriptor beanDescriptor = new BeanDescriptor  ( com.kolodkin.lafselector.LookAndFeelsComboBox.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
+        BeanDescriptor beanDescriptor = new BeanDescriptor  ( com.kolodkin.lafselector.ThemesComboBox.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
         // Here you can add code for customizing the BeanDescriptor.
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
@@ -149,126 +149,126 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
         PropertyDescriptor[] properties = new PropertyDescriptor[120];
     
         try {
-            properties[PROPERTY_accessibleContext] = new PropertyDescriptor ( "accessibleContext", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAccessibleContext", null ); // NOI18N
-            properties[PROPERTY_action] = new PropertyDescriptor ( "action", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAction", "setAction" ); // NOI18N
-            properties[PROPERTY_actionCommand] = new PropertyDescriptor ( "actionCommand", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getActionCommand", "setActionCommand" ); // NOI18N
-            properties[PROPERTY_actionListeners] = new PropertyDescriptor ( "actionListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getActionListeners", null ); // NOI18N
-            properties[PROPERTY_actionMap] = new PropertyDescriptor ( "actionMap", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getActionMap", "setActionMap" ); // NOI18N
-            properties[PROPERTY_alignmentX] = new PropertyDescriptor ( "alignmentX", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAlignmentX", "setAlignmentX" ); // NOI18N
-            properties[PROPERTY_alignmentY] = new PropertyDescriptor ( "alignmentY", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAlignmentY", "setAlignmentY" ); // NOI18N
-            properties[PROPERTY_ancestorListeners] = new PropertyDescriptor ( "ancestorListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAncestorListeners", null ); // NOI18N
-            properties[PROPERTY_autoscrolls] = new PropertyDescriptor ( "autoscrolls", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getAutoscrolls", "setAutoscrolls" ); // NOI18N
-            properties[PROPERTY_background] = new PropertyDescriptor ( "background", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getBackground", "setBackground" ); // NOI18N
-            properties[PROPERTY_backgroundSet] = new PropertyDescriptor ( "backgroundSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isBackgroundSet", null ); // NOI18N
-            properties[PROPERTY_baselineResizeBehavior] = new PropertyDescriptor ( "baselineResizeBehavior", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getBaselineResizeBehavior", null ); // NOI18N
-            properties[PROPERTY_border] = new PropertyDescriptor ( "border", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getBorder", "setBorder" ); // NOI18N
-            properties[PROPERTY_bounds] = new PropertyDescriptor ( "bounds", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getBounds", "setBounds" ); // NOI18N
-            properties[PROPERTY_colorModel] = new PropertyDescriptor ( "colorModel", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getColorModel", null ); // NOI18N
-            properties[PROPERTY_component] = new IndexedPropertyDescriptor ( "component", com.kolodkin.lafselector.LookAndFeelsComboBox.class, null, null, "getComponent", null ); // NOI18N
-            properties[PROPERTY_componentCount] = new PropertyDescriptor ( "componentCount", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getComponentCount", null ); // NOI18N
-            properties[PROPERTY_componentListeners] = new PropertyDescriptor ( "componentListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getComponentListeners", null ); // NOI18N
-            properties[PROPERTY_componentOrientation] = new PropertyDescriptor ( "componentOrientation", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getComponentOrientation", "setComponentOrientation" ); // NOI18N
-            properties[PROPERTY_componentPopupMenu] = new PropertyDescriptor ( "componentPopupMenu", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getComponentPopupMenu", "setComponentPopupMenu" ); // NOI18N
-            properties[PROPERTY_components] = new PropertyDescriptor ( "components", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getComponents", null ); // NOI18N
-            properties[PROPERTY_containerListeners] = new PropertyDescriptor ( "containerListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getContainerListeners", null ); // NOI18N
-            properties[PROPERTY_cursor] = new PropertyDescriptor ( "cursor", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getCursor", "setCursor" ); // NOI18N
-            properties[PROPERTY_cursorSet] = new PropertyDescriptor ( "cursorSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isCursorSet", null ); // NOI18N
-            properties[PROPERTY_debugGraphicsOptions] = new PropertyDescriptor ( "debugGraphicsOptions", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getDebugGraphicsOptions", "setDebugGraphicsOptions" ); // NOI18N
-            properties[PROPERTY_displayable] = new PropertyDescriptor ( "displayable", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isDisplayable", null ); // NOI18N
-            properties[PROPERTY_doubleBuffered] = new PropertyDescriptor ( "doubleBuffered", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isDoubleBuffered", "setDoubleBuffered" ); // NOI18N
-            properties[PROPERTY_dropTarget] = new PropertyDescriptor ( "dropTarget", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getDropTarget", "setDropTarget" ); // NOI18N
-            properties[PROPERTY_editable] = new PropertyDescriptor ( "editable", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isEditable", "setEditable" ); // NOI18N
-            properties[PROPERTY_editor] = new PropertyDescriptor ( "editor", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getEditor", "setEditor" ); // NOI18N
-            properties[PROPERTY_enabled] = new PropertyDescriptor ( "enabled", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isEnabled", "setEnabled" ); // NOI18N
-            properties[PROPERTY_focusable] = new PropertyDescriptor ( "focusable", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusable", "setFocusable" ); // NOI18N
-            properties[PROPERTY_focusCycleRoot] = new PropertyDescriptor ( "focusCycleRoot", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusCycleRoot", "setFocusCycleRoot" ); // NOI18N
-            properties[PROPERTY_focusCycleRootAncestor] = new PropertyDescriptor ( "focusCycleRootAncestor", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getFocusCycleRootAncestor", null ); // NOI18N
-            properties[PROPERTY_focusListeners] = new PropertyDescriptor ( "focusListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getFocusListeners", null ); // NOI18N
-            properties[PROPERTY_focusOwner] = new PropertyDescriptor ( "focusOwner", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusOwner", null ); // NOI18N
-            properties[PROPERTY_focusTraversable] = new PropertyDescriptor ( "focusTraversable", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusTraversable", null ); // NOI18N
-            properties[PROPERTY_focusTraversalKeys] = new IndexedPropertyDescriptor ( "focusTraversalKeys", com.kolodkin.lafselector.LookAndFeelsComboBox.class, null, null, null, "setFocusTraversalKeys" ); // NOI18N
-            properties[PROPERTY_focusTraversalKeysEnabled] = new PropertyDescriptor ( "focusTraversalKeysEnabled", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getFocusTraversalKeysEnabled", "setFocusTraversalKeysEnabled" ); // NOI18N
-            properties[PROPERTY_focusTraversalPolicy] = new PropertyDescriptor ( "focusTraversalPolicy", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getFocusTraversalPolicy", "setFocusTraversalPolicy" ); // NOI18N
-            properties[PROPERTY_focusTraversalPolicyProvider] = new PropertyDescriptor ( "focusTraversalPolicyProvider", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusTraversalPolicyProvider", "setFocusTraversalPolicyProvider" ); // NOI18N
-            properties[PROPERTY_focusTraversalPolicySet] = new PropertyDescriptor ( "focusTraversalPolicySet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFocusTraversalPolicySet", null ); // NOI18N
-            properties[PROPERTY_font] = new PropertyDescriptor ( "font", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getFont", "setFont" ); // NOI18N
-            properties[PROPERTY_fontSet] = new PropertyDescriptor ( "fontSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isFontSet", null ); // NOI18N
-            properties[PROPERTY_foreground] = new PropertyDescriptor ( "foreground", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getForeground", "setForeground" ); // NOI18N
-            properties[PROPERTY_foregroundSet] = new PropertyDescriptor ( "foregroundSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isForegroundSet", null ); // NOI18N
-            properties[PROPERTY_graphics] = new PropertyDescriptor ( "graphics", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getGraphics", null ); // NOI18N
-            properties[PROPERTY_graphicsConfiguration] = new PropertyDescriptor ( "graphicsConfiguration", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getGraphicsConfiguration", null ); // NOI18N
-            properties[PROPERTY_height] = new PropertyDescriptor ( "height", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getHeight", null ); // NOI18N
-            properties[PROPERTY_hierarchyBoundsListeners] = new PropertyDescriptor ( "hierarchyBoundsListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getHierarchyBoundsListeners", null ); // NOI18N
-            properties[PROPERTY_hierarchyListeners] = new PropertyDescriptor ( "hierarchyListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getHierarchyListeners", null ); // NOI18N
-            properties[PROPERTY_ignoreRepaint] = new PropertyDescriptor ( "ignoreRepaint", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getIgnoreRepaint", "setIgnoreRepaint" ); // NOI18N
-            properties[PROPERTY_inheritsPopupMenu] = new PropertyDescriptor ( "inheritsPopupMenu", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInheritsPopupMenu", "setInheritsPopupMenu" ); // NOI18N
-            properties[PROPERTY_inputContext] = new PropertyDescriptor ( "inputContext", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInputContext", null ); // NOI18N
-            properties[PROPERTY_inputMap] = new PropertyDescriptor ( "inputMap", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInputMap", null ); // NOI18N
-            properties[PROPERTY_inputMethodListeners] = new PropertyDescriptor ( "inputMethodListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInputMethodListeners", null ); // NOI18N
-            properties[PROPERTY_inputMethodRequests] = new PropertyDescriptor ( "inputMethodRequests", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInputMethodRequests", null ); // NOI18N
-            properties[PROPERTY_inputVerifier] = new PropertyDescriptor ( "inputVerifier", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInputVerifier", "setInputVerifier" ); // NOI18N
-            properties[PROPERTY_insets] = new PropertyDescriptor ( "insets", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getInsets", null ); // NOI18N
-            properties[PROPERTY_itemCount] = new PropertyDescriptor ( "itemCount", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getItemCount", null ); // NOI18N
-            properties[PROPERTY_itemListeners] = new PropertyDescriptor ( "itemListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getItemListeners", null ); // NOI18N
-            properties[PROPERTY_keyListeners] = new PropertyDescriptor ( "keyListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getKeyListeners", null ); // NOI18N
-            properties[PROPERTY_keySelectionManager] = new PropertyDescriptor ( "keySelectionManager", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getKeySelectionManager", "setKeySelectionManager" ); // NOI18N
-            properties[PROPERTY_layout] = new PropertyDescriptor ( "layout", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getLayout", "setLayout" ); // NOI18N
-            properties[PROPERTY_lightweight] = new PropertyDescriptor ( "lightweight", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isLightweight", null ); // NOI18N
-            properties[PROPERTY_lightWeightPopupEnabled] = new PropertyDescriptor ( "lightWeightPopupEnabled", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isLightWeightPopupEnabled", "setLightWeightPopupEnabled" ); // NOI18N
-            properties[PROPERTY_locale] = new PropertyDescriptor ( "locale", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getLocale", "setLocale" ); // NOI18N
-            properties[PROPERTY_location] = new PropertyDescriptor ( "location", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getLocation", "setLocation" ); // NOI18N
-            properties[PROPERTY_locationOnScreen] = new PropertyDescriptor ( "locationOnScreen", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getLocationOnScreen", null ); // NOI18N
-            properties[PROPERTY_managingFocus] = new PropertyDescriptor ( "managingFocus", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isManagingFocus", null ); // NOI18N
-            properties[PROPERTY_maximumRowCount] = new PropertyDescriptor ( "maximumRowCount", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMaximumRowCount", "setMaximumRowCount" ); // NOI18N
-            properties[PROPERTY_maximumSize] = new PropertyDescriptor ( "maximumSize", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMaximumSize", "setMaximumSize" ); // NOI18N
-            properties[PROPERTY_maximumSizeSet] = new PropertyDescriptor ( "maximumSizeSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isMaximumSizeSet", null ); // NOI18N
-            properties[PROPERTY_minimumSize] = new PropertyDescriptor ( "minimumSize", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMinimumSize", "setMinimumSize" ); // NOI18N
-            properties[PROPERTY_minimumSizeSet] = new PropertyDescriptor ( "minimumSizeSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isMinimumSizeSet", null ); // NOI18N
-            properties[PROPERTY_model] = new PropertyDescriptor ( "model", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getModel", "setModel" ); // NOI18N
-            properties[PROPERTY_mouseListeners] = new PropertyDescriptor ( "mouseListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMouseListeners", null ); // NOI18N
-            properties[PROPERTY_mouseMotionListeners] = new PropertyDescriptor ( "mouseMotionListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMouseMotionListeners", null ); // NOI18N
-            properties[PROPERTY_mousePosition] = new PropertyDescriptor ( "mousePosition", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMousePosition", null ); // NOI18N
-            properties[PROPERTY_mouseWheelListeners] = new PropertyDescriptor ( "mouseWheelListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getMouseWheelListeners", null ); // NOI18N
-            properties[PROPERTY_name] = new PropertyDescriptor ( "name", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getName", "setName" ); // NOI18N
-            properties[PROPERTY_nextFocusableComponent] = new PropertyDescriptor ( "nextFocusableComponent", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getNextFocusableComponent", "setNextFocusableComponent" ); // NOI18N
-            properties[PROPERTY_opaque] = new PropertyDescriptor ( "opaque", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isOpaque", "setOpaque" ); // NOI18N
-            properties[PROPERTY_optimizedDrawingEnabled] = new PropertyDescriptor ( "optimizedDrawingEnabled", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isOptimizedDrawingEnabled", null ); // NOI18N
-            properties[PROPERTY_paintingForPrint] = new PropertyDescriptor ( "paintingForPrint", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isPaintingForPrint", null ); // NOI18N
-            properties[PROPERTY_paintingTile] = new PropertyDescriptor ( "paintingTile", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isPaintingTile", null ); // NOI18N
-            properties[PROPERTY_parent] = new PropertyDescriptor ( "parent", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getParent", null ); // NOI18N
-            properties[PROPERTY_peer] = new PropertyDescriptor ( "peer", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getPeer", null ); // NOI18N
-            properties[PROPERTY_popupMenuListeners] = new PropertyDescriptor ( "popupMenuListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getPopupMenuListeners", null ); // NOI18N
-            properties[PROPERTY_popupVisible] = new PropertyDescriptor ( "popupVisible", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isPopupVisible", "setPopupVisible" ); // NOI18N
-            properties[PROPERTY_preferredSize] = new PropertyDescriptor ( "preferredSize", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getPreferredSize", "setPreferredSize" ); // NOI18N
-            properties[PROPERTY_preferredSizeSet] = new PropertyDescriptor ( "preferredSizeSet", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isPreferredSizeSet", null ); // NOI18N
-            properties[PROPERTY_propertyChangeListeners] = new PropertyDescriptor ( "propertyChangeListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getPropertyChangeListeners", null ); // NOI18N
-            properties[PROPERTY_prototypeDisplayValue] = new PropertyDescriptor ( "prototypeDisplayValue", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getPrototypeDisplayValue", "setPrototypeDisplayValue" ); // NOI18N
-            properties[PROPERTY_registeredKeyStrokes] = new PropertyDescriptor ( "registeredKeyStrokes", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getRegisteredKeyStrokes", null ); // NOI18N
-            properties[PROPERTY_renderer] = new PropertyDescriptor ( "renderer", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getRenderer", "setRenderer" ); // NOI18N
-            properties[PROPERTY_requestFocusEnabled] = new PropertyDescriptor ( "requestFocusEnabled", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isRequestFocusEnabled", "setRequestFocusEnabled" ); // NOI18N
-            properties[PROPERTY_rootPane] = new PropertyDescriptor ( "rootPane", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getRootPane", null ); // NOI18N
-            properties[PROPERTY_selectedIndex] = new PropertyDescriptor ( "selectedIndex", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getSelectedIndex", "setSelectedIndex" ); // NOI18N
-            properties[PROPERTY_selectedItem] = new PropertyDescriptor ( "selectedItem", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getSelectedItem", "setSelectedItem" ); // NOI18N
-            properties[PROPERTY_selectedLookAndFeel] = new PropertyDescriptor ( "selectedLookAndFeel", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getSelectedLookAndFeel", "setSelectedLookAndFeel" ); // NOI18N
-            properties[PROPERTY_selectedObjects] = new PropertyDescriptor ( "selectedObjects", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getSelectedObjects", null ); // NOI18N
-            properties[PROPERTY_showing] = new PropertyDescriptor ( "showing", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isShowing", null ); // NOI18N
-            properties[PROPERTY_size] = new PropertyDescriptor ( "size", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getSize", "setSize" ); // NOI18N
-            properties[PROPERTY_toolkit] = new PropertyDescriptor ( "toolkit", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getToolkit", null ); // NOI18N
-            properties[PROPERTY_toolTipText] = new PropertyDescriptor ( "toolTipText", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getToolTipText", "setToolTipText" ); // NOI18N
-            properties[PROPERTY_topLevelAncestor] = new PropertyDescriptor ( "topLevelAncestor", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getTopLevelAncestor", null ); // NOI18N
-            properties[PROPERTY_transferHandler] = new PropertyDescriptor ( "transferHandler", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getTransferHandler", "setTransferHandler" ); // NOI18N
-            properties[PROPERTY_treeLock] = new PropertyDescriptor ( "treeLock", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getTreeLock", null ); // NOI18N
-            properties[PROPERTY_UI] = new PropertyDescriptor ( "UI", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getUI", "setUI" ); // NOI18N
-            properties[PROPERTY_UIClassID] = new PropertyDescriptor ( "UIClassID", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getUIClassID", null ); // NOI18N
-            properties[PROPERTY_valid] = new PropertyDescriptor ( "valid", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isValid", null ); // NOI18N
-            properties[PROPERTY_validateRoot] = new PropertyDescriptor ( "validateRoot", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isValidateRoot", null ); // NOI18N
-            properties[PROPERTY_verifyInputWhenFocusTarget] = new PropertyDescriptor ( "verifyInputWhenFocusTarget", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getVerifyInputWhenFocusTarget", "setVerifyInputWhenFocusTarget" ); // NOI18N
-            properties[PROPERTY_vetoableChangeListeners] = new PropertyDescriptor ( "vetoableChangeListeners", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getVetoableChangeListeners", null ); // NOI18N
-            properties[PROPERTY_visible] = new PropertyDescriptor ( "visible", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "isVisible", "setVisible" ); // NOI18N
-            properties[PROPERTY_visibleRect] = new PropertyDescriptor ( "visibleRect", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getVisibleRect", null ); // NOI18N
-            properties[PROPERTY_width] = new PropertyDescriptor ( "width", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getWidth", null ); // NOI18N
-            properties[PROPERTY_x] = new PropertyDescriptor ( "x", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getX", null ); // NOI18N
-            properties[PROPERTY_y] = new PropertyDescriptor ( "y", com.kolodkin.lafselector.LookAndFeelsComboBox.class, "getY", null ); // NOI18N
+            properties[PROPERTY_accessibleContext] = new PropertyDescriptor ( "accessibleContext", com.kolodkin.lafselector.ThemesComboBox.class, "getAccessibleContext", null ); // NOI18N
+            properties[PROPERTY_action] = new PropertyDescriptor ( "action", com.kolodkin.lafselector.ThemesComboBox.class, "getAction", "setAction" ); // NOI18N
+            properties[PROPERTY_actionCommand] = new PropertyDescriptor ( "actionCommand", com.kolodkin.lafselector.ThemesComboBox.class, "getActionCommand", "setActionCommand" ); // NOI18N
+            properties[PROPERTY_actionListeners] = new PropertyDescriptor ( "actionListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getActionListeners", null ); // NOI18N
+            properties[PROPERTY_actionMap] = new PropertyDescriptor ( "actionMap", com.kolodkin.lafselector.ThemesComboBox.class, "getActionMap", "setActionMap" ); // NOI18N
+            properties[PROPERTY_alignmentX] = new PropertyDescriptor ( "alignmentX", com.kolodkin.lafselector.ThemesComboBox.class, "getAlignmentX", "setAlignmentX" ); // NOI18N
+            properties[PROPERTY_alignmentY] = new PropertyDescriptor ( "alignmentY", com.kolodkin.lafselector.ThemesComboBox.class, "getAlignmentY", "setAlignmentY" ); // NOI18N
+            properties[PROPERTY_ancestorListeners] = new PropertyDescriptor ( "ancestorListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getAncestorListeners", null ); // NOI18N
+            properties[PROPERTY_autoscrolls] = new PropertyDescriptor ( "autoscrolls", com.kolodkin.lafselector.ThemesComboBox.class, "getAutoscrolls", "setAutoscrolls" ); // NOI18N
+            properties[PROPERTY_background] = new PropertyDescriptor ( "background", com.kolodkin.lafselector.ThemesComboBox.class, "getBackground", "setBackground" ); // NOI18N
+            properties[PROPERTY_backgroundSet] = new PropertyDescriptor ( "backgroundSet", com.kolodkin.lafselector.ThemesComboBox.class, "isBackgroundSet", null ); // NOI18N
+            properties[PROPERTY_baselineResizeBehavior] = new PropertyDescriptor ( "baselineResizeBehavior", com.kolodkin.lafselector.ThemesComboBox.class, "getBaselineResizeBehavior", null ); // NOI18N
+            properties[PROPERTY_border] = new PropertyDescriptor ( "border", com.kolodkin.lafselector.ThemesComboBox.class, "getBorder", "setBorder" ); // NOI18N
+            properties[PROPERTY_bounds] = new PropertyDescriptor ( "bounds", com.kolodkin.lafselector.ThemesComboBox.class, "getBounds", "setBounds" ); // NOI18N
+            properties[PROPERTY_colorModel] = new PropertyDescriptor ( "colorModel", com.kolodkin.lafselector.ThemesComboBox.class, "getColorModel", null ); // NOI18N
+            properties[PROPERTY_component] = new IndexedPropertyDescriptor ( "component", com.kolodkin.lafselector.ThemesComboBox.class, null, null, "getComponent", null ); // NOI18N
+            properties[PROPERTY_componentCount] = new PropertyDescriptor ( "componentCount", com.kolodkin.lafselector.ThemesComboBox.class, "getComponentCount", null ); // NOI18N
+            properties[PROPERTY_componentListeners] = new PropertyDescriptor ( "componentListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getComponentListeners", null ); // NOI18N
+            properties[PROPERTY_componentOrientation] = new PropertyDescriptor ( "componentOrientation", com.kolodkin.lafselector.ThemesComboBox.class, "getComponentOrientation", "setComponentOrientation" ); // NOI18N
+            properties[PROPERTY_componentPopupMenu] = new PropertyDescriptor ( "componentPopupMenu", com.kolodkin.lafselector.ThemesComboBox.class, "getComponentPopupMenu", "setComponentPopupMenu" ); // NOI18N
+            properties[PROPERTY_components] = new PropertyDescriptor ( "components", com.kolodkin.lafselector.ThemesComboBox.class, "getComponents", null ); // NOI18N
+            properties[PROPERTY_containerListeners] = new PropertyDescriptor ( "containerListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getContainerListeners", null ); // NOI18N
+            properties[PROPERTY_cursor] = new PropertyDescriptor ( "cursor", com.kolodkin.lafselector.ThemesComboBox.class, "getCursor", "setCursor" ); // NOI18N
+            properties[PROPERTY_cursorSet] = new PropertyDescriptor ( "cursorSet", com.kolodkin.lafselector.ThemesComboBox.class, "isCursorSet", null ); // NOI18N
+            properties[PROPERTY_debugGraphicsOptions] = new PropertyDescriptor ( "debugGraphicsOptions", com.kolodkin.lafselector.ThemesComboBox.class, "getDebugGraphicsOptions", "setDebugGraphicsOptions" ); // NOI18N
+            properties[PROPERTY_displayable] = new PropertyDescriptor ( "displayable", com.kolodkin.lafselector.ThemesComboBox.class, "isDisplayable", null ); // NOI18N
+            properties[PROPERTY_doubleBuffered] = new PropertyDescriptor ( "doubleBuffered", com.kolodkin.lafselector.ThemesComboBox.class, "isDoubleBuffered", "setDoubleBuffered" ); // NOI18N
+            properties[PROPERTY_dropTarget] = new PropertyDescriptor ( "dropTarget", com.kolodkin.lafselector.ThemesComboBox.class, "getDropTarget", "setDropTarget" ); // NOI18N
+            properties[PROPERTY_editable] = new PropertyDescriptor ( "editable", com.kolodkin.lafselector.ThemesComboBox.class, "isEditable", "setEditable" ); // NOI18N
+            properties[PROPERTY_editor] = new PropertyDescriptor ( "editor", com.kolodkin.lafselector.ThemesComboBox.class, "getEditor", "setEditor" ); // NOI18N
+            properties[PROPERTY_enabled] = new PropertyDescriptor ( "enabled", com.kolodkin.lafselector.ThemesComboBox.class, "isEnabled", "setEnabled" ); // NOI18N
+            properties[PROPERTY_focusable] = new PropertyDescriptor ( "focusable", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusable", "setFocusable" ); // NOI18N
+            properties[PROPERTY_focusCycleRoot] = new PropertyDescriptor ( "focusCycleRoot", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusCycleRoot", "setFocusCycleRoot" ); // NOI18N
+            properties[PROPERTY_focusCycleRootAncestor] = new PropertyDescriptor ( "focusCycleRootAncestor", com.kolodkin.lafselector.ThemesComboBox.class, "getFocusCycleRootAncestor", null ); // NOI18N
+            properties[PROPERTY_focusListeners] = new PropertyDescriptor ( "focusListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getFocusListeners", null ); // NOI18N
+            properties[PROPERTY_focusOwner] = new PropertyDescriptor ( "focusOwner", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusOwner", null ); // NOI18N
+            properties[PROPERTY_focusTraversable] = new PropertyDescriptor ( "focusTraversable", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusTraversable", null ); // NOI18N
+            properties[PROPERTY_focusTraversalKeys] = new IndexedPropertyDescriptor ( "focusTraversalKeys", com.kolodkin.lafselector.ThemesComboBox.class, null, null, null, "setFocusTraversalKeys" ); // NOI18N
+            properties[PROPERTY_focusTraversalKeysEnabled] = new PropertyDescriptor ( "focusTraversalKeysEnabled", com.kolodkin.lafselector.ThemesComboBox.class, "getFocusTraversalKeysEnabled", "setFocusTraversalKeysEnabled" ); // NOI18N
+            properties[PROPERTY_focusTraversalPolicy] = new PropertyDescriptor ( "focusTraversalPolicy", com.kolodkin.lafselector.ThemesComboBox.class, "getFocusTraversalPolicy", "setFocusTraversalPolicy" ); // NOI18N
+            properties[PROPERTY_focusTraversalPolicyProvider] = new PropertyDescriptor ( "focusTraversalPolicyProvider", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusTraversalPolicyProvider", "setFocusTraversalPolicyProvider" ); // NOI18N
+            properties[PROPERTY_focusTraversalPolicySet] = new PropertyDescriptor ( "focusTraversalPolicySet", com.kolodkin.lafselector.ThemesComboBox.class, "isFocusTraversalPolicySet", null ); // NOI18N
+            properties[PROPERTY_font] = new PropertyDescriptor ( "font", com.kolodkin.lafselector.ThemesComboBox.class, "getFont", "setFont" ); // NOI18N
+            properties[PROPERTY_fontSet] = new PropertyDescriptor ( "fontSet", com.kolodkin.lafselector.ThemesComboBox.class, "isFontSet", null ); // NOI18N
+            properties[PROPERTY_foreground] = new PropertyDescriptor ( "foreground", com.kolodkin.lafselector.ThemesComboBox.class, "getForeground", "setForeground" ); // NOI18N
+            properties[PROPERTY_foregroundSet] = new PropertyDescriptor ( "foregroundSet", com.kolodkin.lafselector.ThemesComboBox.class, "isForegroundSet", null ); // NOI18N
+            properties[PROPERTY_graphics] = new PropertyDescriptor ( "graphics", com.kolodkin.lafselector.ThemesComboBox.class, "getGraphics", null ); // NOI18N
+            properties[PROPERTY_graphicsConfiguration] = new PropertyDescriptor ( "graphicsConfiguration", com.kolodkin.lafselector.ThemesComboBox.class, "getGraphicsConfiguration", null ); // NOI18N
+            properties[PROPERTY_height] = new PropertyDescriptor ( "height", com.kolodkin.lafselector.ThemesComboBox.class, "getHeight", null ); // NOI18N
+            properties[PROPERTY_hierarchyBoundsListeners] = new PropertyDescriptor ( "hierarchyBoundsListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getHierarchyBoundsListeners", null ); // NOI18N
+            properties[PROPERTY_hierarchyListeners] = new PropertyDescriptor ( "hierarchyListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getHierarchyListeners", null ); // NOI18N
+            properties[PROPERTY_ignoreRepaint] = new PropertyDescriptor ( "ignoreRepaint", com.kolodkin.lafselector.ThemesComboBox.class, "getIgnoreRepaint", "setIgnoreRepaint" ); // NOI18N
+            properties[PROPERTY_inheritsPopupMenu] = new PropertyDescriptor ( "inheritsPopupMenu", com.kolodkin.lafselector.ThemesComboBox.class, "getInheritsPopupMenu", "setInheritsPopupMenu" ); // NOI18N
+            properties[PROPERTY_inputContext] = new PropertyDescriptor ( "inputContext", com.kolodkin.lafselector.ThemesComboBox.class, "getInputContext", null ); // NOI18N
+            properties[PROPERTY_inputMap] = new PropertyDescriptor ( "inputMap", com.kolodkin.lafselector.ThemesComboBox.class, "getInputMap", null ); // NOI18N
+            properties[PROPERTY_inputMethodListeners] = new PropertyDescriptor ( "inputMethodListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getInputMethodListeners", null ); // NOI18N
+            properties[PROPERTY_inputMethodRequests] = new PropertyDescriptor ( "inputMethodRequests", com.kolodkin.lafselector.ThemesComboBox.class, "getInputMethodRequests", null ); // NOI18N
+            properties[PROPERTY_inputVerifier] = new PropertyDescriptor ( "inputVerifier", com.kolodkin.lafselector.ThemesComboBox.class, "getInputVerifier", "setInputVerifier" ); // NOI18N
+            properties[PROPERTY_insets] = new PropertyDescriptor ( "insets", com.kolodkin.lafselector.ThemesComboBox.class, "getInsets", null ); // NOI18N
+            properties[PROPERTY_itemCount] = new PropertyDescriptor ( "itemCount", com.kolodkin.lafselector.ThemesComboBox.class, "getItemCount", null ); // NOI18N
+            properties[PROPERTY_itemListeners] = new PropertyDescriptor ( "itemListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getItemListeners", null ); // NOI18N
+            properties[PROPERTY_keyListeners] = new PropertyDescriptor ( "keyListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getKeyListeners", null ); // NOI18N
+            properties[PROPERTY_keySelectionManager] = new PropertyDescriptor ( "keySelectionManager", com.kolodkin.lafselector.ThemesComboBox.class, "getKeySelectionManager", "setKeySelectionManager" ); // NOI18N
+            properties[PROPERTY_layout] = new PropertyDescriptor ( "layout", com.kolodkin.lafselector.ThemesComboBox.class, "getLayout", "setLayout" ); // NOI18N
+            properties[PROPERTY_lightweight] = new PropertyDescriptor ( "lightweight", com.kolodkin.lafselector.ThemesComboBox.class, "isLightweight", null ); // NOI18N
+            properties[PROPERTY_lightWeightPopupEnabled] = new PropertyDescriptor ( "lightWeightPopupEnabled", com.kolodkin.lafselector.ThemesComboBox.class, "isLightWeightPopupEnabled", "setLightWeightPopupEnabled" ); // NOI18N
+            properties[PROPERTY_locale] = new PropertyDescriptor ( "locale", com.kolodkin.lafselector.ThemesComboBox.class, "getLocale", "setLocale" ); // NOI18N
+            properties[PROPERTY_location] = new PropertyDescriptor ( "location", com.kolodkin.lafselector.ThemesComboBox.class, "getLocation", "setLocation" ); // NOI18N
+            properties[PROPERTY_locationOnScreen] = new PropertyDescriptor ( "locationOnScreen", com.kolodkin.lafselector.ThemesComboBox.class, "getLocationOnScreen", null ); // NOI18N
+            properties[PROPERTY_managingFocus] = new PropertyDescriptor ( "managingFocus", com.kolodkin.lafselector.ThemesComboBox.class, "isManagingFocus", null ); // NOI18N
+            properties[PROPERTY_maximumRowCount] = new PropertyDescriptor ( "maximumRowCount", com.kolodkin.lafselector.ThemesComboBox.class, "getMaximumRowCount", "setMaximumRowCount" ); // NOI18N
+            properties[PROPERTY_maximumSize] = new PropertyDescriptor ( "maximumSize", com.kolodkin.lafselector.ThemesComboBox.class, "getMaximumSize", "setMaximumSize" ); // NOI18N
+            properties[PROPERTY_maximumSizeSet] = new PropertyDescriptor ( "maximumSizeSet", com.kolodkin.lafselector.ThemesComboBox.class, "isMaximumSizeSet", null ); // NOI18N
+            properties[PROPERTY_minimumSize] = new PropertyDescriptor ( "minimumSize", com.kolodkin.lafselector.ThemesComboBox.class, "getMinimumSize", "setMinimumSize" ); // NOI18N
+            properties[PROPERTY_minimumSizeSet] = new PropertyDescriptor ( "minimumSizeSet", com.kolodkin.lafselector.ThemesComboBox.class, "isMinimumSizeSet", null ); // NOI18N
+            properties[PROPERTY_model] = new PropertyDescriptor ( "model", com.kolodkin.lafselector.ThemesComboBox.class, "getModel", "setModel" ); // NOI18N
+            properties[PROPERTY_mouseListeners] = new PropertyDescriptor ( "mouseListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getMouseListeners", null ); // NOI18N
+            properties[PROPERTY_mouseMotionListeners] = new PropertyDescriptor ( "mouseMotionListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getMouseMotionListeners", null ); // NOI18N
+            properties[PROPERTY_mousePosition] = new PropertyDescriptor ( "mousePosition", com.kolodkin.lafselector.ThemesComboBox.class, "getMousePosition", null ); // NOI18N
+            properties[PROPERTY_mouseWheelListeners] = new PropertyDescriptor ( "mouseWheelListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getMouseWheelListeners", null ); // NOI18N
+            properties[PROPERTY_name] = new PropertyDescriptor ( "name", com.kolodkin.lafselector.ThemesComboBox.class, "getName", "setName" ); // NOI18N
+            properties[PROPERTY_nextFocusableComponent] = new PropertyDescriptor ( "nextFocusableComponent", com.kolodkin.lafselector.ThemesComboBox.class, "getNextFocusableComponent", "setNextFocusableComponent" ); // NOI18N
+            properties[PROPERTY_opaque] = new PropertyDescriptor ( "opaque", com.kolodkin.lafselector.ThemesComboBox.class, "isOpaque", "setOpaque" ); // NOI18N
+            properties[PROPERTY_optimizedDrawingEnabled] = new PropertyDescriptor ( "optimizedDrawingEnabled", com.kolodkin.lafselector.ThemesComboBox.class, "isOptimizedDrawingEnabled", null ); // NOI18N
+            properties[PROPERTY_paintingForPrint] = new PropertyDescriptor ( "paintingForPrint", com.kolodkin.lafselector.ThemesComboBox.class, "isPaintingForPrint", null ); // NOI18N
+            properties[PROPERTY_paintingTile] = new PropertyDescriptor ( "paintingTile", com.kolodkin.lafselector.ThemesComboBox.class, "isPaintingTile", null ); // NOI18N
+            properties[PROPERTY_parent] = new PropertyDescriptor ( "parent", com.kolodkin.lafselector.ThemesComboBox.class, "getParent", null ); // NOI18N
+            properties[PROPERTY_peer] = new PropertyDescriptor ( "peer", com.kolodkin.lafselector.ThemesComboBox.class, "getPeer", null ); // NOI18N
+            properties[PROPERTY_popupMenuListeners] = new PropertyDescriptor ( "popupMenuListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getPopupMenuListeners", null ); // NOI18N
+            properties[PROPERTY_popupVisible] = new PropertyDescriptor ( "popupVisible", com.kolodkin.lafselector.ThemesComboBox.class, "isPopupVisible", "setPopupVisible" ); // NOI18N
+            properties[PROPERTY_preferredSize] = new PropertyDescriptor ( "preferredSize", com.kolodkin.lafselector.ThemesComboBox.class, "getPreferredSize", "setPreferredSize" ); // NOI18N
+            properties[PROPERTY_preferredSizeSet] = new PropertyDescriptor ( "preferredSizeSet", com.kolodkin.lafselector.ThemesComboBox.class, "isPreferredSizeSet", null ); // NOI18N
+            properties[PROPERTY_propertyChangeListeners] = new PropertyDescriptor ( "propertyChangeListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getPropertyChangeListeners", null ); // NOI18N
+            properties[PROPERTY_prototypeDisplayValue] = new PropertyDescriptor ( "prototypeDisplayValue", com.kolodkin.lafselector.ThemesComboBox.class, "getPrototypeDisplayValue", "setPrototypeDisplayValue" ); // NOI18N
+            properties[PROPERTY_registeredKeyStrokes] = new PropertyDescriptor ( "registeredKeyStrokes", com.kolodkin.lafselector.ThemesComboBox.class, "getRegisteredKeyStrokes", null ); // NOI18N
+            properties[PROPERTY_renderer] = new PropertyDescriptor ( "renderer", com.kolodkin.lafselector.ThemesComboBox.class, "getRenderer", "setRenderer" ); // NOI18N
+            properties[PROPERTY_requestFocusEnabled] = new PropertyDescriptor ( "requestFocusEnabled", com.kolodkin.lafselector.ThemesComboBox.class, "isRequestFocusEnabled", "setRequestFocusEnabled" ); // NOI18N
+            properties[PROPERTY_rootPane] = new PropertyDescriptor ( "rootPane", com.kolodkin.lafselector.ThemesComboBox.class, "getRootPane", null ); // NOI18N
+            properties[PROPERTY_selectedIndex] = new PropertyDescriptor ( "selectedIndex", com.kolodkin.lafselector.ThemesComboBox.class, "getSelectedIndex", "setSelectedIndex" ); // NOI18N
+            properties[PROPERTY_selectedItem] = new PropertyDescriptor ( "selectedItem", com.kolodkin.lafselector.ThemesComboBox.class, "getSelectedItem", "setSelectedItem" ); // NOI18N
+            properties[PROPERTY_selectedLookAndFeel] = new PropertyDescriptor ( "selectedLookAndFeel", com.kolodkin.lafselector.ThemesComboBox.class, "getSelectedLookAndFeel", "setSelectedLookAndFeel" ); // NOI18N
+            properties[PROPERTY_selectedObjects] = new PropertyDescriptor ( "selectedObjects", com.kolodkin.lafselector.ThemesComboBox.class, "getSelectedObjects", null ); // NOI18N
+            properties[PROPERTY_showing] = new PropertyDescriptor ( "showing", com.kolodkin.lafselector.ThemesComboBox.class, "isShowing", null ); // NOI18N
+            properties[PROPERTY_size] = new PropertyDescriptor ( "size", com.kolodkin.lafselector.ThemesComboBox.class, "getSize", "setSize" ); // NOI18N
+            properties[PROPERTY_toolkit] = new PropertyDescriptor ( "toolkit", com.kolodkin.lafselector.ThemesComboBox.class, "getToolkit", null ); // NOI18N
+            properties[PROPERTY_toolTipText] = new PropertyDescriptor ( "toolTipText", com.kolodkin.lafselector.ThemesComboBox.class, "getToolTipText", "setToolTipText" ); // NOI18N
+            properties[PROPERTY_topLevelAncestor] = new PropertyDescriptor ( "topLevelAncestor", com.kolodkin.lafselector.ThemesComboBox.class, "getTopLevelAncestor", null ); // NOI18N
+            properties[PROPERTY_transferHandler] = new PropertyDescriptor ( "transferHandler", com.kolodkin.lafselector.ThemesComboBox.class, "getTransferHandler", "setTransferHandler" ); // NOI18N
+            properties[PROPERTY_treeLock] = new PropertyDescriptor ( "treeLock", com.kolodkin.lafselector.ThemesComboBox.class, "getTreeLock", null ); // NOI18N
+            properties[PROPERTY_UI] = new PropertyDescriptor ( "UI", com.kolodkin.lafselector.ThemesComboBox.class, "getUI", "setUI" ); // NOI18N
+            properties[PROPERTY_UIClassID] = new PropertyDescriptor ( "UIClassID", com.kolodkin.lafselector.ThemesComboBox.class, "getUIClassID", null ); // NOI18N
+            properties[PROPERTY_valid] = new PropertyDescriptor ( "valid", com.kolodkin.lafselector.ThemesComboBox.class, "isValid", null ); // NOI18N
+            properties[PROPERTY_validateRoot] = new PropertyDescriptor ( "validateRoot", com.kolodkin.lafselector.ThemesComboBox.class, "isValidateRoot", null ); // NOI18N
+            properties[PROPERTY_verifyInputWhenFocusTarget] = new PropertyDescriptor ( "verifyInputWhenFocusTarget", com.kolodkin.lafselector.ThemesComboBox.class, "getVerifyInputWhenFocusTarget", "setVerifyInputWhenFocusTarget" ); // NOI18N
+            properties[PROPERTY_vetoableChangeListeners] = new PropertyDescriptor ( "vetoableChangeListeners", com.kolodkin.lafselector.ThemesComboBox.class, "getVetoableChangeListeners", null ); // NOI18N
+            properties[PROPERTY_visible] = new PropertyDescriptor ( "visible", com.kolodkin.lafselector.ThemesComboBox.class, "isVisible", "setVisible" ); // NOI18N
+            properties[PROPERTY_visibleRect] = new PropertyDescriptor ( "visibleRect", com.kolodkin.lafselector.ThemesComboBox.class, "getVisibleRect", null ); // NOI18N
+            properties[PROPERTY_width] = new PropertyDescriptor ( "width", com.kolodkin.lafselector.ThemesComboBox.class, "getWidth", null ); // NOI18N
+            properties[PROPERTY_x] = new PropertyDescriptor ( "x", com.kolodkin.lafselector.ThemesComboBox.class, "getX", null ); // NOI18N
+            properties[PROPERTY_y] = new PropertyDescriptor ( "y", com.kolodkin.lafselector.ThemesComboBox.class, "getY", null ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
@@ -301,22 +301,22 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
         EventSetDescriptor[] eventSets = new EventSetDescriptor[16];
     
         try {
-            eventSets[EVENT_actionListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "actionListener", java.awt.event.ActionListener.class, new String[] {"actionPerformed"}, "addActionListener", "removeActionListener" ); // NOI18N
-            eventSets[EVENT_ancestorListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "ancestorListener", javax.swing.event.AncestorListener.class, new String[] {"ancestorAdded", "ancestorRemoved", "ancestorMoved"}, "addAncestorListener", "removeAncestorListener" ); // NOI18N
-            eventSets[EVENT_componentListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "componentListener", java.awt.event.ComponentListener.class, new String[] {"componentResized", "componentMoved", "componentShown", "componentHidden"}, "addComponentListener", "removeComponentListener" ); // NOI18N
-            eventSets[EVENT_containerListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "containerListener", java.awt.event.ContainerListener.class, new String[] {"componentAdded", "componentRemoved"}, "addContainerListener", "removeContainerListener" ); // NOI18N
-            eventSets[EVENT_focusListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "focusListener", java.awt.event.FocusListener.class, new String[] {"focusGained", "focusLost"}, "addFocusListener", "removeFocusListener" ); // NOI18N
-            eventSets[EVENT_hierarchyBoundsListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "hierarchyBoundsListener", java.awt.event.HierarchyBoundsListener.class, new String[] {"ancestorMoved", "ancestorResized"}, "addHierarchyBoundsListener", "removeHierarchyBoundsListener" ); // NOI18N
-            eventSets[EVENT_hierarchyListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "hierarchyListener", java.awt.event.HierarchyListener.class, new String[] {"hierarchyChanged"}, "addHierarchyListener", "removeHierarchyListener" ); // NOI18N
-            eventSets[EVENT_inputMethodListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "inputMethodListener", java.awt.event.InputMethodListener.class, new String[] {"inputMethodTextChanged", "caretPositionChanged"}, "addInputMethodListener", "removeInputMethodListener" ); // NOI18N
-            eventSets[EVENT_itemListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "itemListener", java.awt.event.ItemListener.class, new String[] {"itemStateChanged"}, "addItemListener", "removeItemListener" ); // NOI18N
-            eventSets[EVENT_keyListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "keyListener", java.awt.event.KeyListener.class, new String[] {"keyTyped", "keyPressed", "keyReleased"}, "addKeyListener", "removeKeyListener" ); // NOI18N
-            eventSets[EVENT_mouseListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "mouseListener", java.awt.event.MouseListener.class, new String[] {"mouseClicked", "mousePressed", "mouseReleased", "mouseEntered", "mouseExited"}, "addMouseListener", "removeMouseListener" ); // NOI18N
-            eventSets[EVENT_mouseMotionListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "mouseMotionListener", java.awt.event.MouseMotionListener.class, new String[] {"mouseDragged", "mouseMoved"}, "addMouseMotionListener", "removeMouseMotionListener" ); // NOI18N
-            eventSets[EVENT_mouseWheelListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "mouseWheelListener", java.awt.event.MouseWheelListener.class, new String[] {"mouseWheelMoved"}, "addMouseWheelListener", "removeMouseWheelListener" ); // NOI18N
-            eventSets[EVENT_popupMenuListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "popupMenuListener", javax.swing.event.PopupMenuListener.class, new String[] {"popupMenuWillBecomeVisible", "popupMenuWillBecomeInvisible", "popupMenuCanceled"}, "addPopupMenuListener", "removePopupMenuListener" ); // NOI18N
-            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
-            eventSets[EVENT_vetoableChangeListener] = new EventSetDescriptor ( com.kolodkin.lafselector.LookAndFeelsComboBox.class, "vetoableChangeListener", java.beans.VetoableChangeListener.class, new String[] {"vetoableChange"}, "addVetoableChangeListener", "removeVetoableChangeListener" ); // NOI18N
+            eventSets[EVENT_actionListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "actionListener", java.awt.event.ActionListener.class, new String[] {"actionPerformed"}, "addActionListener", "removeActionListener" ); // NOI18N
+            eventSets[EVENT_ancestorListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "ancestorListener", javax.swing.event.AncestorListener.class, new String[] {"ancestorAdded", "ancestorRemoved", "ancestorMoved"}, "addAncestorListener", "removeAncestorListener" ); // NOI18N
+            eventSets[EVENT_componentListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "componentListener", java.awt.event.ComponentListener.class, new String[] {"componentResized", "componentMoved", "componentShown", "componentHidden"}, "addComponentListener", "removeComponentListener" ); // NOI18N
+            eventSets[EVENT_containerListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "containerListener", java.awt.event.ContainerListener.class, new String[] {"componentAdded", "componentRemoved"}, "addContainerListener", "removeContainerListener" ); // NOI18N
+            eventSets[EVENT_focusListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "focusListener", java.awt.event.FocusListener.class, new String[] {"focusGained", "focusLost"}, "addFocusListener", "removeFocusListener" ); // NOI18N
+            eventSets[EVENT_hierarchyBoundsListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "hierarchyBoundsListener", java.awt.event.HierarchyBoundsListener.class, new String[] {"ancestorMoved", "ancestorResized"}, "addHierarchyBoundsListener", "removeHierarchyBoundsListener" ); // NOI18N
+            eventSets[EVENT_hierarchyListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "hierarchyListener", java.awt.event.HierarchyListener.class, new String[] {"hierarchyChanged"}, "addHierarchyListener", "removeHierarchyListener" ); // NOI18N
+            eventSets[EVENT_inputMethodListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "inputMethodListener", java.awt.event.InputMethodListener.class, new String[] {"inputMethodTextChanged", "caretPositionChanged"}, "addInputMethodListener", "removeInputMethodListener" ); // NOI18N
+            eventSets[EVENT_itemListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "itemListener", java.awt.event.ItemListener.class, new String[] {"itemStateChanged"}, "addItemListener", "removeItemListener" ); // NOI18N
+            eventSets[EVENT_keyListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "keyListener", java.awt.event.KeyListener.class, new String[] {"keyTyped", "keyPressed", "keyReleased"}, "addKeyListener", "removeKeyListener" ); // NOI18N
+            eventSets[EVENT_mouseListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "mouseListener", java.awt.event.MouseListener.class, new String[] {"mouseClicked", "mousePressed", "mouseReleased", "mouseEntered", "mouseExited"}, "addMouseListener", "removeMouseListener" ); // NOI18N
+            eventSets[EVENT_mouseMotionListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "mouseMotionListener", java.awt.event.MouseMotionListener.class, new String[] {"mouseDragged", "mouseMoved"}, "addMouseMotionListener", "removeMouseMotionListener" ); // NOI18N
+            eventSets[EVENT_mouseWheelListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "mouseWheelListener", java.awt.event.MouseWheelListener.class, new String[] {"mouseWheelMoved"}, "addMouseWheelListener", "removeMouseWheelListener" ); // NOI18N
+            eventSets[EVENT_popupMenuListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "popupMenuListener", javax.swing.event.PopupMenuListener.class, new String[] {"popupMenuWillBecomeVisible", "popupMenuWillBecomeInvisible", "popupMenuCanceled"}, "addPopupMenuListener", "removePopupMenuListener" ); // NOI18N
+            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
+            eventSets[EVENT_vetoableChangeListener] = new EventSetDescriptor ( com.kolodkin.lafselector.ThemesComboBox.class, "vetoableChangeListener", java.beans.VetoableChangeListener.class, new String[] {"vetoableChange"}, "addVetoableChangeListener", "removeVetoableChangeListener" ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
@@ -516,9 +516,9 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
             methods[METHOD_add7].setDisplayName ( "" );
             methods[METHOD_addItem8] = new MethodDescriptor(javax.swing.JComboBox.class.getMethod("addItem", new Class[] {java.lang.Object.class})); // NOI18N
             methods[METHOD_addItem8].setDisplayName ( "" );
-            methods[METHOD_addLookAndFeel9] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("addLookAndFeel", new Class[] {java.lang.String.class, java.lang.String.class})); // NOI18N
+            methods[METHOD_addLookAndFeel9] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("addLookAndFeel", new Class[] {java.lang.String.class, java.lang.String.class})); // NOI18N
             methods[METHOD_addLookAndFeel9].setDisplayName ( "" );
-            methods[METHOD_addNotify10] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("addNotify", new Class[] {})); // NOI18N
+            methods[METHOD_addNotify10] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("addNotify", new Class[] {})); // NOI18N
             methods[METHOD_addNotify10].setDisplayName ( "" );
             methods[METHOD_addPropertyChangeListener11] = new MethodDescriptor(java.awt.Container.class.getMethod("addPropertyChangeListener", new Class[] {java.lang.String.class, java.beans.PropertyChangeListener.class})); // NOI18N
             methods[METHOD_addPropertyChangeListener11].setDisplayName ( "" );
@@ -616,7 +616,7 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
             methods[METHOD_getFocusTraversalKeys57].setDisplayName ( "" );
             methods[METHOD_getFontMetrics58] = new MethodDescriptor(javax.swing.JComponent.class.getMethod("getFontMetrics", new Class[] {java.awt.Font.class})); // NOI18N
             methods[METHOD_getFontMetrics58].setDisplayName ( "" );
-            methods[METHOD_getIndexOfLookAndFeel59] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("getIndexOfLookAndFeel", new Class[] {java.lang.String.class})); // NOI18N
+            methods[METHOD_getIndexOfLookAndFeel59] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("getIndexOfLookAndFeel", new Class[] {java.lang.String.class})); // NOI18N
             methods[METHOD_getIndexOfLookAndFeel59].setDisplayName ( "" );
             methods[METHOD_getInsets60] = new MethodDescriptor(javax.swing.JComponent.class.getMethod("getInsets", new Class[] {java.awt.Insets.class})); // NOI18N
             methods[METHOD_getInsets60].setDisplayName ( "" );
@@ -756,9 +756,9 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
             methods[METHOD_removeItem127].setDisplayName ( "" );
             methods[METHOD_removeItemAt128] = new MethodDescriptor(javax.swing.JComboBox.class.getMethod("removeItemAt", new Class[] {int.class})); // NOI18N
             methods[METHOD_removeItemAt128].setDisplayName ( "" );
-            methods[METHOD_removeLookAndFeel129] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("removeLookAndFeel", new Class[] {java.lang.String.class})); // NOI18N
+            methods[METHOD_removeLookAndFeel129] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("removeLookAndFeel", new Class[] {java.lang.String.class})); // NOI18N
             methods[METHOD_removeLookAndFeel129].setDisplayName ( "" );
-            methods[METHOD_removeNotify130] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("removeNotify", new Class[] {})); // NOI18N
+            methods[METHOD_removeNotify130] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("removeNotify", new Class[] {})); // NOI18N
             methods[METHOD_removeNotify130].setDisplayName ( "" );
             methods[METHOD_removePropertyChangeListener131] = new MethodDescriptor(java.awt.Component.class.getMethod("removePropertyChangeListener", new Class[] {java.lang.String.class, java.beans.PropertyChangeListener.class})); // NOI18N
             methods[METHOD_removePropertyChangeListener131].setDisplayName ( "" );
@@ -792,7 +792,7 @@ public class LookAndFeelsComboBoxBeanInfo extends SimpleBeanInfo {
             methods[METHOD_revalidate145].setDisplayName ( "" );
             methods[METHOD_scrollRectToVisible146] = new MethodDescriptor(javax.swing.JComponent.class.getMethod("scrollRectToVisible", new Class[] {java.awt.Rectangle.class})); // NOI18N
             methods[METHOD_scrollRectToVisible146].setDisplayName ( "" );
-            methods[METHOD_selectedCurrentLookAndFeel147] = new MethodDescriptor(com.kolodkin.lafselector.LookAndFeelsComboBox.class.getMethod("selectedCurrentLookAndFeel", new Class[] {})); // NOI18N
+            methods[METHOD_selectedCurrentLookAndFeel147] = new MethodDescriptor(com.kolodkin.lafselector.ThemesComboBox.class.getMethod("selectedCurrentLookAndFeel", new Class[] {})); // NOI18N
             methods[METHOD_selectedCurrentLookAndFeel147].setDisplayName ( "" );
             methods[METHOD_selectWithKeyChar148] = new MethodDescriptor(javax.swing.JComboBox.class.getMethod("selectWithKeyChar", new Class[] {char.class})); // NOI18N
             methods[METHOD_selectWithKeyChar148].setDisplayName ( "" );

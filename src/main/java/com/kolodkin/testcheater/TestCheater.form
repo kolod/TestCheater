@@ -154,7 +154,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.kolodkin.lafselector.LookAndFeelsComboBox" name="theme">
+    <Component class="com.kolodkin.lafselector.ThemesComboBox" name="theme">
     </Component>
     <Component class="javax.swing.JCheckBox" name="mute">
       <Properties>

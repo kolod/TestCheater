@@ -22,29 +22,14 @@ public class ThemeInfo {
     final String name;
     final String resourceName;
     final boolean dark;
-    final String license;
-    final String licenseFile;
-    final String sourceCodeUrl;
-    final String sourceCodePath;
     final File themeFile;
     final String ñlassName;
 
-    ThemeInfo(String name, String resourceName, boolean dark,
-            String license, String licenseFile,
-            String sourceCodeUrl, String sourceCodePath,
-            File themeFile, String lafClassName) {
+    ThemeInfo(String name, String resourceName, boolean dark, File themeFile, String ñlassName) {
         this.name = name;
         this.resourceName = resourceName;
         this.dark = dark;
-        this.license = license;
-        this.licenseFile = licenseFile;
-        this.sourceCodeUrl = sourceCodeUrl;
-        this.sourceCodePath = sourceCodePath;
         this.themeFile = themeFile;
-        this.ñlassName = lafClassName;
-    }
-    
-    public String getClassName() {
-        return ñlassName;
+        this.ñlassName = ñlassName;
     }
 }

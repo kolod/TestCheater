@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
-import javax.swing.event.ListDataListener;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -39,10 +38,10 @@ public class ThemesComboBoxModel extends AbstractListModel<ThemeInfo> implements
 
     private List<ThemeInfo> loadCoreThemes() {
         List<ThemeInfo> coreThemes = new ArrayList<>();
-        coreThemes.add(new ThemeInfo("Flat Light", null, false, null, null, null, null, null, FlatLightLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat Dark", null, true, null, null, null, null, null, FlatDarkLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat IntelliJ", null, false, null, null, null, null, null, FlatIntelliJLaf.class.getName()));
-        coreThemes.add(new ThemeInfo("Flat Darcula", null, true, null, null, null, null, null, FlatDarculaLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Light", null, false, null, FlatLightLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Dark", null, true, null, FlatDarkLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat IntelliJ", null, false, null, FlatIntelliJLaf.class.getName()));
+        coreThemes.add(new ThemeInfo("Flat Darcula", null, true, null, FlatDarculaLaf.class.getName()));
         coreThemes.sort(comparator);
         return coreThemes;
     }
@@ -65,12 +64,7 @@ public class ThemesComboBoxModel extends AbstractListModel<ThemeInfo> implements
             Map<String, String> value = (Map<String, String>) e.getValue();
             String name = value.get("name");
             boolean dark = Boolean.parseBoolean(value.get("dark"));
-            String license = value.get("license");
-            String licenseFile = value.get("licenseFile");
-            String sourceCodeUrl = value.get("sourceCodeUrl");
-            String sourceCodePath = value.get("sourceCodePath");
-
-            bundledThemes.add(new ThemeInfo(name, resourceName, dark, license, licenseFile, sourceCodeUrl, sourceCodePath, null, null));
+            bundledThemes.add(new ThemeInfo(name, resourceName, dark, null, null));
         });
 
         bundledThemes.sort(comparator);
@@ -100,7 +94,7 @@ public class ThemesComboBoxModel extends AbstractListModel<ThemeInfo> implements
             String name = fname.endsWith(".properties")
                     ? StringUtils.removeTrailing(fname, ".properties")
                     : StringUtils.removeTrailing(fname, ".theme.json");
-            moreThemes.add(new ThemeInfo(name, null, false, null, null, null, null, f, null));
+            moreThemes.add(new ThemeInfo(name, null, false, f, null));
             lastModifiedMap.put(f, f.lastModified());
         }
 

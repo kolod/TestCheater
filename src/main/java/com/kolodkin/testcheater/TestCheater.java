@@ -310,7 +310,7 @@ public class TestCheater extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         answers = new javax.swing.JTable();
         btnClear = new javax.swing.JButton();
-        theme = new com.kolodkin.lafselector.LookAndFeelsComboBox();
+        theme = new com.kolodkin.lafselector.ThemesComboBox();
         mute = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -409,6 +409,6 @@ public class TestCheater extends javax.swing.JFrame {
     private javax.swing.JCheckBox mute;
     private javax.swing.JTextField query;
     private javax.swing.JComboBox<String> test;
-    private com.kolodkin.lafselector.LookAndFeelsComboBox theme;
+    private com.kolodkin.lafselector.ThemesComboBox theme;
     // End of variables declaration//GEN-END:variables
 }

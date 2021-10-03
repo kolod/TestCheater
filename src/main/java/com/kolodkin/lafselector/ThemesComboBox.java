@@ -11,18 +11,19 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LookAndFeelsComboBox extends JComboBox<ThemeInfo> {
+public class ThemesComboBox extends JComboBox<ThemeInfo> {
 
     private static final Logger logger = LogManager.getLogger();
     private final PropertyChangeListener lafListener = this::lafChanged;
     public static final String THEMES_PACKAGE = "/com/formdev/flatlaf/intellijthemes/themes/";
 
-    public LookAndFeelsComboBox() {
+    public ThemesComboBox() {
         setRenderer(new BasicComboBoxRenderer() {
             @Override
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 if (value instanceof ThemeInfo) {
-                    return super.getListCellRendererComponent(list, ((ThemeInfo) value).name, index, isSelected, cellHasFocus);
+                    String[] parts = ((ThemeInfo) value).name.split("/");
+                    return super.getListCellRendererComponent(list, parts[parts.length - 1].trim(), index, isSelected, cellHasFocus);
                 } else {
                     return super.getListCellRendererComponent(list, UIManager.getLookAndFeel().getName(), index, isSelected, cellHasFocus);
                 }
@@ -97,7 +98,7 @@ public class LookAndFeelsComboBox extends JComboBox<ThemeInfo> {
         ComboBoxModel<ThemeInfo> model = getModel();
         int size = model.getSize();
         for (int i = 0; i < size; i++) {
-            if (className.equals(model.getElementAt(i).getClassName())) {
+            if (className.equals(model.getElementAt(i).ñlassName)) {
                 return i;
             }
         }
