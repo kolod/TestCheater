@@ -26,7 +26,6 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 import javax.sound.sampled.*;
 import com.kolodkin.lafselector.*;
-import com.formdev.flatlaf.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.drjekyll.fontchooser.FontDialog;
@@ -34,18 +33,19 @@ import org.drjekyll.fontchooser.FontDialog;
 public class TestCheater extends javax.swing.JFrame {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final ThemesComboBoxModel themesModel = new ThemesComboBoxModel();
     private static Connection conn = null;
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            logger.error("Failed to initialize LaF", ex);
-        }
+//        try {
+//            UIManager.setLookAndFeel(new FlatLightLaf());
+//        } catch (UnsupportedLookAndFeelException ex) {
+//            logger.error("Failed to initialize LaF", ex);
+//        }
 
         /* Create and display the form */
         SwingUtilities.invokeLater(() -> new TestCheater().setVisible(true));
@@ -58,14 +58,6 @@ public class TestCheater extends javax.swing.JFrame {
     public TestCheater() {
         Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
         ResourceBundle bundle = ResourceBundle.getBundle("i18n/TestCheater");
-        
-        // Restore theme
-        try {
-            ThemeInfo themeInfo = new ThemeInfo(prefs.get("theme", ""));
-            themeInfo.apply();
-        } catch (IllegalArgumentException ex) {
-            logger.error(ex.getMessage(), ex);
-        }
 
         // Restore font
         setCustomFont(new Font(
@@ -78,7 +70,7 @@ public class TestCheater extends javax.swing.JFrame {
         initComponents();
 
         // Show miximized
-        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);        
 
         // Customize JTable
         DefaultTableModel answersModel = new DefaultTableModel();
@@ -87,9 +79,9 @@ public class TestCheater extends javax.swing.JFrame {
         answers.setModel(answersModel);
         answers.getColumnModel().getColumn(0).setCellRenderer(new WordWrapCellRenderer());
         answers.getColumnModel().getColumn(1).setCellRenderer(new WordWrapCellRenderer());
-
-        // Initialize look and feels combo box        
-        theme.setModel(new ThemesComboBoxModel());
+        
+        // Restore theme
+        theme.setSelectedItem(prefs.get("theme", "Flat Light"));
 
         // Main logic
         connect();
@@ -109,11 +101,9 @@ public class TestCheater extends javax.swing.JFrame {
         });
         
         theme.addActionListener(e -> {
-            Object obj = theme.getSelectedItem();
-            if (obj instanceof ThemeInfo) {
-                ThemeInfo t = (ThemeInfo) obj;
-                String s = t.toString();
-                prefs.put("theme", s);
+            Object thameName = theme.getSelectedItem();
+            if (thameName instanceof String) {
+                prefs.put("theme", (String) thameName);
             }
         });
 
@@ -138,6 +128,7 @@ public class TestCheater extends javax.swing.JFrame {
         btnFont.addActionListener((ActionEvent e) -> {
             FontDialog dialog = new FontDialog(this, bundle.getString("title_choose_font"), true);
             dialog.setSelectedFont(btnFont.getFont());
+            dialog.setLocationRelativeTo(this);
             dialog.setVisible(true);
             if (!dialog.isCancelSelected()) {
                 try {
@@ -331,8 +322,8 @@ public class TestCheater extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         answers = new javax.swing.JTable();
         btnClear = new javax.swing.JButton();
-        theme = new com.kolodkin.lafselector.ThemesComboBox();
         mute = new javax.swing.JCheckBox();
+        theme = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/TestCheater"); // NOI18N
@@ -362,6 +353,8 @@ public class TestCheater extends javax.swing.JFrame {
         mute.setText(bundle.getString("button_mute")); // NOI18N
         mute.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
+        theme.setModel(themesModel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -374,8 +367,8 @@ public class TestCheater extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(mute))
                     .addComponent(test, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,9 +386,9 @@ public class TestCheater extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFont, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                    .addComponent(theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -409,7 +402,7 @@ public class TestCheater extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAnswers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -430,6 +423,6 @@ public class TestCheater extends javax.swing.JFrame {
     private javax.swing.JCheckBox mute;
     private javax.swing.JTextField query;
     private javax.swing.JComboBox<String> test;
-    private com.kolodkin.lafselector.ThemesComboBox theme;
+    private javax.swing.JComboBox<String> theme;
     // End of variables declaration//GEN-END:variables
 }

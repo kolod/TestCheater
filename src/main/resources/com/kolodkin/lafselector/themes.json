@@ -1,239 +1,318 @@
-{
-    "arc-theme.theme.json": {
+[
+    {
+        "name": "Flat Light",
+        "class": "com.formdev.flatlaf.FlatLightLaf"
+    },
+    {
+        "name": "Flat Dark",
+        "class": "com.formdev.flatlaf.FlatDarkLaf"
+    },
+    {
+        "name": "Flat IntelliJ",
+        "class": "com.formdev.flatlaf.FlatIntelliJLaf"
+    },
+    {
+        "name": "Flat Darcula",
+        "class": "com.formdev.flatlaf.FlatDarculaLaf"
+    },
+    {
+        "resource": "arc-theme.theme.json",
         "name": "Arc"
     },
-    "arc-theme-orange.theme.json": {
+    {
+        "resource": "arc-theme-orange.theme.json",
         "name": "Arc - Orange"
     },
-    "arc_theme_dark.theme.json": {
+    {
+        "resource": "arc_theme_dark.theme.json",
         "name": "Arc Dark",
         "dark": true
     },
-    "arc_theme_dark_orange.theme.json": {
+    {
+        "resource": "arc_theme_dark_orange.theme.json",
         "name": "Arc Dark - Orange",
         "dark": true
     },
-    "Carbon.theme.json": {
+    {
+        "resource": "Carbon.theme.json",
         "name": "Carbon",
         "dark": true
     },
-    "Cobalt_2.theme.json": {
+    {
+        "resource": "Cobalt_2.theme.json",
         "name": "Cobalt 2",
         "dark": true
     },
-    "Cyan.theme.json": {
+    {
+        "resource": "Cyan.theme.json",
         "name": "Cyan light"
     },
-    "DarkFlatTheme.theme.json": {
+    {
+        "resource": "DarkFlatTheme.theme.json",
         "name": "Dark Flat",
         "dark": true
     },
-    "DarkPurple.theme.json": {
+    {
+        "resource": "DarkPurple.theme.json",
         "name": "Dark purple",
         "dark": true
     },
-    "Dracula.theme.json": {
+    {
+        "resource": "Dracula.theme.json",
         "name": "Dracula",
         "dark": true
     },
-    "Gradianto_dark_fuchsia.theme.json": {
+    {
+        "resource": "Gradianto_dark_fuchsia.theme.json",
         "name": "Gradianto Dark Fuchsia",
         "dark": true
     },
-    "Gradianto_deep_ocean.theme.json": {
+    {
+        "resource": "Gradianto_deep_ocean.theme.json",
         "name": "Gradianto Deep Ocean",
         "dark": true
     },
-    "Gradianto_midnight_blue.theme.json": {
+    {
+        "resource": "Gradianto_midnight_blue.theme.json",
         "name": "Gradianto Midnight Blue",
         "dark": true
     },
-    "Gradianto_Nature_Green.theme.json": {
+    {
+        "resource": "Gradianto_Nature_Green.theme.json",
         "name": "Gradianto Nature Green",
         "dark": true
     },
-    "Gray.theme.json": {
+    {
+        "resource": "Gray.theme.json",
         "name": "Gray"
     },
-    "gruvbox_dark_hard.theme.json": {
+    {
+        "resource": "gruvbox_dark_hard.theme.json",
         "name": "Gruvbox Dark Hard",
         "dark": true
     },
-    "gruvbox_dark_medium.theme.json": {
+    {
+        "resource": "gruvbox_dark_medium.theme.json",
         "name": "Gruvbox Dark Medium",
         "dark": true
     },
-    "gruvbox_dark_soft.theme.json": {
+    {
+        "resource": "gruvbox_dark_soft.theme.json",
         "name": "Gruvbox Dark Soft",
         "dark": true
     },
-    "HiberbeeDark.theme.json": {
+    {
+        "resource": "HiberbeeDark.theme.json",
         "name": "Hiberbee Dark",
         "dark": true
     },
-    "HighContrast.theme.json": {
+    {
+        "resource": "HighContrast.theme.json",
         "name": "High contrast",
         "dark": true
     },
-    "LightFlatTheme.theme.json": {
+    {
+        "resource": "LightFlatTheme.theme.json",
         "name": "Light Flat"
     },
-    "MaterialTheme.theme.json": {
+    {
+        "resource": "MaterialTheme.theme.json",
         "name": "Material Design Dark",
         "dark": true
     },
-    "Monocai.theme.json": {
+    {
+        "resource": "Monocai.theme.json",
         "name": "Monocai",
         "dark": true
     },
-    "nord.theme.json": {
+    {
+        "resource": "nord.theme.json",
         "name": "Nord",
         "dark": true
     },
-    "one_dark.theme.json": {
+    {
+        "resource": "one_dark.theme.json",
         "name": "One Dark",
         "dark": true
     },
-    "SolarizedDark.theme.json": {
+    {
+        "resource": "SolarizedDark.theme.json",
         "name": "Solarized Dark",
         "dark": true
     },
-    "SolarizedLight.theme.json": {
+    {
+        "resource": "SolarizedLight.theme.json",
         "name": "Solarized Light"
     },
-    "Spacegray.theme.json": {
+    {
+        "resource": "Spacegray.theme.json",
         "name": "Spacegray",
         "dark": true
     },
-    "vuesion_theme.theme.json": {
+    {
+        "resource": "vuesion_theme.theme.json",
         "name": "Vuesion",
         "dark": true
     },
 
-    "material-theme-ui-lite/Arc Dark.theme.json": {
-        "name": "Material Theme UI Lite / Arc Dark",
+    {
+        "resource": "material-theme-ui-lite/Arc Dark.theme.json",
+        "name": "Arc Dark",
         "dark": true
     },
-    "material-theme-ui-lite/Arc Dark Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Arc Dark Contrast",
+    {
+        "resource": "material-theme-ui-lite/Arc Dark Contrast.theme.json",
+        "name": "Arc Dark Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Atom One Dark.theme.json": {
-        "name": "Material Theme UI Lite / Atom One Dark",
+    {
+        "resource": "material-theme-ui-lite/Atom One Dark.theme.json",
+        "name": "Atom One Dark",
         "dark": true
     },
-    "material-theme-ui-lite/Atom One Dark Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Atom One Dark Contrast",
+    {
+        "resource": "material-theme-ui-lite/Atom One Dark Contrast.theme.json",
+        "name": "Atom One Dark Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Atom One Light.theme.json": {
-        "name": "Material Theme UI Lite / Atom One Light"
+    {
+        "resource": "material-theme-ui-lite/Atom One Light.theme.json",
+        "name": "Atom One Light"
     },
-    "material-theme-ui-lite/Atom One Light Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Atom One Light Contrast"
+    {
+        "resource": "material-theme-ui-lite/Atom One Light Contrast.theme.json",
+        "name": "Atom One Light Contrast"
     },
-    "material-theme-ui-lite/Dracula.theme.json": {
-        "name": "Material Theme UI Lite / Dracula",
+    {
+        "resource": "material-theme-ui-lite/Dracula.theme.json",
+        "name": "Dracula",
         "dark": true
     },
-    "material-theme-ui-lite/Dracula Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Dracula Contrast",
+    {
+        "resource": "material-theme-ui-lite/Dracula Contrast.theme.json",
+        "name": "Dracula Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/GitHub.theme.json": {
-        "name": "Material Theme UI Lite / GitHub"
+    {
+        "resource": "material-theme-ui-lite/GitHub.theme.json",
+        "name": "GitHub"
     },
-    "material-theme-ui-lite/GitHub Contrast.theme.json": {
-        "name": "Material Theme UI Lite / GitHub Contrast"
+    {
+        "resource": "material-theme-ui-lite/GitHub Contrast.theme.json",
+        "name": "GitHub Contrast"
     },
-    "material-theme-ui-lite/GitHub Dark.theme.json": {
-        "name": "Material Theme UI Lite / GitHub Dark",
+    {
+        "resource": "material-theme-ui-lite/GitHub Dark.theme.json",
+        "name": "GitHub Dark",
         "dark": true
     },
-    "material-theme-ui-lite/GitHub Dark Contrast.theme.json": {
-        "name": "Material Theme UI Lite / GitHub Dark Contrast",
+    {
+        "resource": "material-theme-ui-lite/GitHub Dark Contrast.theme.json",
+        "name": "GitHub Dark Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Light Owl.theme.json": {
-        "name": "Material Theme UI Lite / Light Owl"
+    {
+        "resource": "material-theme-ui-lite/Light Owl.theme.json",
+        "name": "Light Owl"
     },
-    "material-theme-ui-lite/Light Owl Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Light Owl Contrast"
+    {
+        "resource": "material-theme-ui-lite/Light Owl Contrast.theme.json",
+        "name": "Light Owl Contrast"
     },
-    "material-theme-ui-lite/Material Darker.theme.json": {
-        "name": "Material Theme UI Lite / Material Darker",
+    {
+        "resource": "material-theme-ui-lite/Material Darker.theme.json",
+        "name": "Material Darker",
         "dark": true
     },
-    "material-theme-ui-lite/Material Darker Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Material Darker Contrast",
+    {
+        "resource": "material-theme-ui-lite/Material Darker Contrast.theme.json",
+        "name": "Material Darker Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Material Deep Ocean.theme.json": {
-        "name": "Material Theme UI Lite / Material Deep Ocean",
+    {
+        "resource": "material-theme-ui-lite/Material Deep Ocean.theme.json",
+        "name": "Material Deep Ocean",
         "dark": true
     },
-    "material-theme-ui-lite/Material Deep Ocean Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Material Deep Ocean Contrast",
+    {
+        "resource": "material-theme-ui-lite/Material Deep Ocean Contrast.theme.json",
+        "name": "Material Deep Ocean Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Material Lighter.theme.json": {
-        "name": "Material Theme UI Lite / Material Lighter"
+    {
+        "resource": "material-theme-ui-lite/Material Lighter.theme.json",
+        "name": "Material Lighter"
     },
-    "material-theme-ui-lite/Material Lighter Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Material Lighter Contrast"
+    {
+        "resource": "material-theme-ui-lite/Material Lighter Contrast.theme.json",
+        "name": "Material Lighter Contrast"
     },
-    "material-theme-ui-lite/Material Oceanic.theme.json": {
-        "name": "Material Theme UI Lite / Material Oceanic",
+    {
+        "resource": "material-theme-ui-lite/Material Oceanic.theme.json",
+        "name": "Material Oceanic",
         "dark": true
     },
-    "material-theme-ui-lite/Material Oceanic Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Material Oceanic Contrast",
+    {
+        "resource": "material-theme-ui-lite/Material Oceanic Contrast.theme.json",
+        "name": "Material Oceanic Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Material Palenight.theme.json": {
-        "name": "Material Theme UI Lite / Material Palenight",
+    {
+        "resource": "material-theme-ui-lite/Material Palenight.theme.json",
+        "name": "Material Palenight",
         "dark": true
     },
-    "material-theme-ui-lite/Material Palenight Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Material Palenight Contrast",
+    {
+        "resource": "material-theme-ui-lite/Material Palenight Contrast.theme.json",
+        "name": "Material Palenight Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Monokai Pro.theme.json": {
-        "name": "Material Theme UI Lite / Monokai Pro",
+    {
+        "resource": "material-theme-ui-lite/Monokai Pro.theme.json",
+        "name": "Monokai Pro",
         "dark": true
     },
-    "material-theme-ui-lite/Monokai Pro Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Monokai Pro Contrast",
+    {
+        "resource": "material-theme-ui-lite/Monokai Pro Contrast.theme.json",
+        "name": "Monokai Pro Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Moonlight.theme.json": {
-        "name": "Material Theme UI Lite / Moonlight",
+    {
+        "resource": "material-theme-ui-lite/Moonlight.theme.json",
+        "name": "Moonlight",
         "dark": true
     },
-    "material-theme-ui-lite/Moonlight Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Moonlight Contrast",
+    {
+        "resource": "material-theme-ui-lite/Moonlight Contrast.theme.json",
+        "name": "Moonlight Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Night Owl.theme.json": {
-        "name": "Material Theme UI Lite / Night Owl",
+    {
+        "resource": "material-theme-ui-lite/Night Owl.theme.json",
+        "name": "Night Owl",
         "dark": true
     },
-    "material-theme-ui-lite/Night Owl Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Night Owl Contrast",
+    {
+        "resource": "material-theme-ui-lite/Night Owl Contrast.theme.json",
+        "name": "Night Owl Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Solarized Dark.theme.json": {
-        "name": "Material Theme UI Lite / Solarized Dark",
+    {
+        "resource": "material-theme-ui-lite/Solarized Dark.theme.json",
+        "name": "Solarized Dark",
         "dark": true
     },
-    "material-theme-ui-lite/Solarized Dark Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Solarized Dark Contrast",
+    {
+        "resource": "material-theme-ui-lite/Solarized Dark Contrast.theme.json",
+        "name": "Solarized Dark Contrast",
         "dark": true
     },
-    "material-theme-ui-lite/Solarized Light.theme.json": {
-        "name": "Material Theme UI Lite / Solarized Light"
+    {
+        "resource": "material-theme-ui-lite/Solarized Light.theme.json",
+        "name": "Solarized Light"
     },
-    "material-theme-ui-lite/Solarized Light Contrast.theme.json": {
-        "name": "Material Theme UI Lite / Solarized Light Contrast"
+    {
+        "resource": "material-theme-ui-lite/Solarized Light Contrast.theme.json",
+        "name": "Solarized Light Contrast"
     }
-}
+]

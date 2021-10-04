@@ -38,8 +38,8 @@
                       <Component id="mute" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="test" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblTest" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblTest" min="-2" pref="479" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="theme" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -62,9 +62,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnFont" alignment="3" pref="23" max="32767" attributes="0"/>
-                  <Component id="theme" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnFont" alignment="3" max="32767" attributes="0"/>
                   <Component id="lblTest" max="32767" attributes="0"/>
+                  <Component id="theme" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="test" min="-2" max="-2" attributes="0"/>
@@ -81,7 +81,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAnswers" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="272" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="255" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -154,8 +154,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.kolodkin.lafselector.ThemesComboBox" name="theme">
-    </Component>
     <Component class="javax.swing.JCheckBox" name="mute">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -163,6 +161,16 @@
         </Property>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="theme">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="themesModel" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
