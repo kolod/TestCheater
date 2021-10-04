@@ -1,19 +1,19 @@
 [
     {
         "name": "Flat Light",
-        "class": "com.formdev.flatlaf.FlatLightLaf"
+        "className": "com.formdev.flatlaf.FlatLightLaf"
     },
     {
         "name": "Flat Dark",
-        "class": "com.formdev.flatlaf.FlatDarkLaf"
+        "className": "com.formdev.flatlaf.FlatDarkLaf"
     },
     {
         "name": "Flat IntelliJ",
-        "class": "com.formdev.flatlaf.FlatIntelliJLaf"
+        "className": "com.formdev.flatlaf.FlatIntelliJLaf"
     },
     {
         "name": "Flat Darcula",
-        "class": "com.formdev.flatlaf.FlatDarculaLaf"
+        "className": "com.formdev.flatlaf.FlatDarculaLaf"
     },
     {
         "resource": "arc-theme.theme.json",

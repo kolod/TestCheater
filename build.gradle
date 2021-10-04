@@ -19,7 +19,16 @@ dependencies {
     implementation 'com.formdev:flatlaf:1.6'
     implementation 'com.formdev:flatlaf-extras:1.6'
     implementation 'com.formdev:flatlaf-intellij-themes:1.6'
+    implementation 'com.google.code.gson:gson:2.8.8'
     testImplementation 'junit:junit:4.13'
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
 }
 
 shadowJar {

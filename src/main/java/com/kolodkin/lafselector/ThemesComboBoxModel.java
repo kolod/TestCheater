@@ -1,14 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// This file is part of TestCheater.
+// Copyright (C) 2021 - ... Oleksandr Kolodkin <alexandr.kolodkin@gmail.com>
+//
+// TestCheater is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Foobar is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 package com.kolodkin.lafselector;
 
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
-import com.formdev.flatlaf.json.Json;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Type;
+import java.net.*;
+import java.nio.file.*;
+import java.nio.file.Path;
 import java.util.*;
 import javax.swing.*;
 import org.apache.logging.log4j.Logger;
@@ -26,46 +41,29 @@ public class ThemesComboBoxModel extends AbstractListModel<String> implements Co
         String className;
         String resource;
 
-        ThemeInfo(String name, String className, String resource) {
-            this.name = name;
-            this.className = className;
-            this.resource = resource;
+        ThemeInfo() {
         }
     }
 
     private static final String THEMES_PACKAGE = "/com/formdev/flatlaf/intellijthemes/themes/";
     private static final Logger logger = LogManager.getLogger();
-    private final List<ThemeInfo> themes = new ArrayList<>();
+    private List<ThemeInfo> themes = new ArrayList<>();
     private Integer selected = null;
 
     public ThemesComboBoxModel() {
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(getClass().getResource("themes.json").toURI())));
 
-        // load themes.json
-        List<Map<String, String>> json = null;
-        try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("themes.json"), StandardCharsets.UTF_8)) {
-            json = (List<Map<String, String>>) Json.parse(reader);
-        } catch (IOException ex) {
+            Type listType = new TypeToken<ArrayList<ThemeInfo>>() {
+            }.getType();
+            
+            themes = new Gson().fromJson(json, listType);
+
+            selected = themes.size() > 0 ? 0 : null;
+            logger.info(String.format("%d bundled themes loaded.", themes.size()));
+        } catch (URISyntaxException | IOException ex) {
             logger.catching(ex);
         }
-
-        // add info about bundled themes
-        if (json != null) {
-            json.forEach(theme -> {
-                String name = theme.get("name");
-                String resource = theme.get("resource");
-                String className = theme.get("class");
-
-                if (name != null) {
-                    themes.add(new ThemeInfo(name, className, resource));
-                }
-            });
-        }
-
-        if (themes.size() > 0) {
-            selected = 0;
-        }
-
-        logger.info(String.format("%d bundled themes loaded.", themes.size()));
     }
 
     public void apply() {
@@ -86,6 +84,7 @@ public class ThemesComboBoxModel extends AbstractListModel<String> implements Co
             // update all components
             FlatLaf.updateUI();
             FlatAnimatedLafChange.hideSnapshotWithAnimation();
+            logger.info(String.format("Set theme: %s.", theme.name));
         }
     }
 
@@ -104,13 +103,11 @@ public class ThemesComboBoxModel extends AbstractListModel<String> implements Co
     public void setSelectedItem(Object anItem) {
         if (anItem instanceof Integer) {
             selected = (Integer) anItem;
-            fireContentsChanged(this, -1, -1);
             apply();
         } else if (anItem instanceof String) {
             for (Integer index = 0; index < themes.size(); index++) {
                 if (themes.get(index).name.equals((String) anItem)) {
                     selected = index;
-                    fireContentsChanged(this, -1, -1);
                     apply();
                     break;
                 }

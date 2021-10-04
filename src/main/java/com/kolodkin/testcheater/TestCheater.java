@@ -40,13 +40,6 @@ public class TestCheater extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-//        try {
-//            UIManager.setLookAndFeel(new FlatLightLaf());
-//        } catch (UnsupportedLookAndFeelException ex) {
-//            logger.error("Failed to initialize LaF", ex);
-//        }
-
         /* Create and display the form */
         SwingUtilities.invokeLater(() -> new TestCheater().setVisible(true));
     }
@@ -204,7 +197,7 @@ public class TestCheater extends javax.swing.JFrame {
      * Updates the list of tests
      */
     private void updateTestsList() {
-        DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(new String[]{});
 
         if (conn != null) {
             String SQL = "SELECT * FROM tests";
