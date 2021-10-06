@@ -23,7 +23,6 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.*;
 import java.nio.file.*;
-import java.nio.file.Path;
 import java.util.*;
 import javax.swing.*;
 import org.apache.logging.log4j.Logger;
@@ -51,19 +50,12 @@ public class ThemesComboBoxModel extends AbstractListModel<String> implements Co
     private Integer selected = null;
 
     public ThemesComboBoxModel() {
-        try {
-            String json = new String(Files.readAllBytes(Paths.get(getClass().getResource("themes.json").toURI())));
-
-            Type listType = new TypeToken<ArrayList<ThemeInfo>>() {
-            }.getType();
-            
-            themes = new Gson().fromJson(json, listType);
-
-            selected = themes.size() > 0 ? 0 : null;
-            logger.info(String.format("%d bundled themes loaded.", themes.size()));
-        } catch (URISyntaxException | IOException ex) {
-            logger.catching(ex);
-        }
+        Type listType = new TypeToken<ArrayList<ThemeInfo>>() {
+        }.getType();
+        Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("themes.json"));
+        themes = new Gson().fromJson(reader, listType);
+        selected = themes.size() > 0 ? 0 : null;
+        logger.info(String.format("%d bundled themes loaded.", themes.size()));
     }
 
     public void apply() {
