@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.kolodkin.testcheater;
+package io.github.kolod;
 
 import java.awt.Color;
 import javax.swing.JTextArea;
@@ -30,13 +30,15 @@ public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer
     public JComponent getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         setLineWrap(true);
         setWrapStyleWord(true);
-        
         setText((value == null) ? "" : value.toString());
-        setFont(table.getFont());  
+        setFont(table.getFont());
         setSize(table.getColumnModel().getColumn(column).getWidth(), table.getRowHeight(row));
-        
+
+        // Calculate row height
         int preferredHeight = getPreferredSize().height;
-        if (table.getRowHeight(row) != preferredHeight) {
+        if (column == 0) {
+            table.setRowHeight(row, preferredHeight);
+        } else if (table.getRowHeight(row) < preferredHeight) {
             table.setRowHeight(row, preferredHeight);
         }
         

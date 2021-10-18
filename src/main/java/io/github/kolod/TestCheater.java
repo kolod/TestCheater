@@ -13,34 +13,58 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
-package com.kolodkin.testcheater;
+package io.github.kolod;
 
-import java.sql.*;
-import java.io.*;
-import java.util.*;
-import java.util.prefs.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
-import javax.sound.sampled.*;
-import com.kolodkin.lafselector.*;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.drjekyll.fontchooser.FontDialog;
 
-public class TestCheater extends javax.swing.JFrame {
+import javax.sound.sampled.*;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.List;
+import java.util.*;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
+public class TestCheater extends JFrame {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final ThemesComboBoxModel themesModel = new ThemesComboBoxModel();
+    private static final FlatlafThemesComboBoxModel themesModel = new FlatlafThemesComboBoxModel();
+    private static final Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
     private static Connection conn = null;
     
+    // UI
+    private final ResourceBundle bundle = ResourceBundle.getBundle("i18n/TestCheater");
+    private final JLabel lblTest = new JLabel();
+    private final JComboBox<String> test = new JComboBox<>();
+    private final JLabel lblQuery = new JLabel();
+    private final JButton btnFont = new JButton();
+    private final JTextField query = new JTextField();
+    private final JLabel lblAnswers = new JLabel();
+    private final JScrollPane jScrollPane2 = new JScrollPane();
+    private final JTable answers = new JTable();
+    private final JButton btnClear = new JButton();
+    private final JCheckBox mute = new JCheckBox();
+    private final JComboBox<String> theme = new JComboBox<>();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         /* Create and display the form */
+        //FlatLightLaf.setup();
         SwingUtilities.invokeLater(() -> new TestCheater().setVisible(true));
     }
 
@@ -49,8 +73,6 @@ public class TestCheater extends javax.swing.JFrame {
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public TestCheater() {
-        Preferences prefs = Preferences.userNodeForPackage(TestCheater.class);
-        ResourceBundle bundle = ResourceBundle.getBundle("i18n/TestCheater");
 
         // Restore font
         setCustomFont(new Font(
@@ -62,8 +84,8 @@ public class TestCheater extends javax.swing.JFrame {
         // Init components generated from form file
         initComponents();
 
-        // Show miximized
-        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);        
+        // Show maximized
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         // Customize JTable
         DefaultTableModel answersModel = new DefaultTableModel();
@@ -72,7 +94,7 @@ public class TestCheater extends javax.swing.JFrame {
         answers.setModel(answersModel);
         answers.getColumnModel().getColumn(0).setCellRenderer(new WordWrapCellRenderer());
         answers.getColumnModel().getColumn(1).setCellRenderer(new WordWrapCellRenderer());
-        
+
         // Restore theme
         theme.setSelectedItem(prefs.get("theme", "Flat Light"));
 
@@ -92,11 +114,11 @@ public class TestCheater extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         theme.addActionListener(e -> {
-            Object thameName = theme.getSelectedItem();
-            if (thameName instanceof String) {
-                prefs.put("theme", (String) thameName);
+            Object themeName = theme.getSelectedItem();
+            if (themeName instanceof String) {
+                prefs.put("theme", (String) themeName);
             }
         });
 
@@ -138,6 +160,7 @@ public class TestCheater extends javax.swing.JFrame {
         });
 
         query.getDocument().addDocumentListener(new DocumentListener() {
+
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updateAnswers();
@@ -172,22 +195,23 @@ public class TestCheater extends javax.swing.JFrame {
             AudioInputStream ais = null;
             try {
                 InputStream stream = getClass().getResourceAsStream("buzzer.wav");
-                InputStream bufferedStream = new BufferedInputStream(stream);
-
-                ais = AudioSystem.getAudioInputStream(bufferedStream);
-                Clip clip = AudioSystem.getClip();
-                clip.open(ais);
-                clip.setFramePosition(0);
-                clip.start();
+                if (stream != null) {
+                    InputStream bufferedStream = new BufferedInputStream(stream);
+                    ais = AudioSystem.getAudioInputStream(bufferedStream);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.setFramePosition(0);
+                    clip.start();
+                }
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-                logger.catching(ex);
+                logger.error(ex.getMessage(), ex);
             } finally {
                 try {
                     if (ais != null) {
                         ais.close();
                     }
                 } catch (IOException ex) {
-                    logger.catching(ex);
+                    logger.error(ex.getMessage(), ex);
                 }
             }
         }
@@ -200,12 +224,12 @@ public class TestCheater extends javax.swing.JFrame {
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(new String[]{});
 
         if (conn != null) {
-            String SQL = "SELECT * FROM tests";
+            String sql = "SELECT * FROM tests";
             try {
-                try (PreparedStatement ps = conn.prepareStatement(SQL); ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        comboBoxModel.addElement(rs.getString("name"));
-                    }
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    comboBoxModel.addElement(rs.getString("name"));
                 }
             } catch (SQLException ex) {
                 logger.error(ex.getMessage(), ex);
@@ -285,8 +309,8 @@ public class TestCheater extends javax.swing.JFrame {
      */
     private static void connect() {
         try {
-            String url = "jdbc:sqlite::resource:com/kolodkin/testcheater/tests.sqlite"; // db parameters
-            conn = DriverManager.getConnection(url); // create a connection to the database  
+            String url = "jdbc:sqlite::resource:io/github/kolod/tests.sqlite"; // db parameters
+            conn = DriverManager.getConnection(url); // create a connection to the database
             logger.info("Connection to SQLite has been established.");
         } catch (SQLException ex) {
             logger.error(ex.getMessage(), ex);
@@ -297,125 +321,122 @@ public class TestCheater extends javax.swing.JFrame {
         this.getInputContext().selectInputMethod(new Locale("ru", "RU"));
     }
 
+    private void translateUI() {
+        setTitle(bundle.getString("title"));
+        lblTest.setText(bundle.getString("label_test"));
+        lblQuery.setText(bundle.getString("label_question"));
+        btnFont.setText(bundle.getString("button_font"));
+        lblAnswers.setText(bundle.getString("label_answers"));
+        btnClear.setText(bundle.getString("button_clear"));
+        mute.setText(bundle.getString("button_mute"));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTest = new javax.swing.JLabel();
-        test = new javax.swing.JComboBox<>();
-        lblQuery = new javax.swing.JLabel();
-        btnFont = new javax.swing.JButton();
-        query = new javax.swing.JTextField();
-        lblAnswers = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        answers = new javax.swing.JTable();
-        btnClear = new javax.swing.JButton();
-        mute = new javax.swing.JCheckBox();
-        theme = new javax.swing.JComboBox<>();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("io/github/kolod/icon.png")));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/TestCheater"); // NOI18N
-        setTitle(bundle.getString("title")); // NOI18N
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("com/kolodkin/testcheater/icon.png")));
-
-        lblTest.setText(bundle.getString("label_test")); // NOI18N
-
-        lblQuery.setText(bundle.getString("label_question")); // NOI18N
-
-        btnFont.setText(bundle.getString("button_font")); // NOI18N
-
-        lblAnswers.setText(bundle.getString("label_answers")); // NOI18N
-
-        answers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(answers);
-
-        btnClear.setText(bundle.getString("button_clear")); // NOI18N
-
-        mute.setText(bundle.getString("button_mute")); // NOI18N
-        mute.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        translateUI();
 
         theme.setModel(themesModel);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mute))
-                    .addComponent(test, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFont))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(query)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClear))
-                    .addComponent(lblAnswers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuery)
-                    .addComponent(mute))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(query, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAnswers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
+        jScrollPane2.setViewportView(answers);
         test.getAccessibleContext().setAccessibleName("");
+        mute.setHorizontalTextPosition(SwingConstants.LEADING);
+
+        SpringLayout layout = new SpringLayout();
+        Container contentPane = getContentPane();
+        contentPane.setLayout(layout);
+
+        contentPane.add(lblTest);
+        contentPane.add(test);
+        contentPane.add(lblQuery);
+        contentPane.add(btnFont);
+        contentPane.add(query);
+        contentPane.add(lblAnswers);
+        contentPane.add(jScrollPane2);
+        contentPane.add(btnClear);
+        contentPane.add(mute);
+        contentPane.add(theme);
+
+        // labelTest
+        layout.putConstraint(SpringLayout.WEST, lblTest, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.BASELINE, lblTest, 0, SpringLayout.BASELINE, btnFont);
+
+        // btnFont
+        layout.putConstraint(SpringLayout.NORTH, btnFont, 5, SpringLayout.NORTH, contentPane);
+        layout.putConstraint(SpringLayout.EAST, btnFont, -5, SpringLayout.EAST, contentPane);
+        layout.putConstraint(SpringLayout.WEST, btnFont, 0, SpringLayout.WEST, btnClear);
+
+        // theme
+        layout.putConstraint(SpringLayout.NORTH, theme, 5, SpringLayout.NORTH, contentPane);
+        layout.putConstraint(SpringLayout.EAST, theme, -5, SpringLayout.WEST, btnFont);
+
+        // test
+        layout.putConstraint(SpringLayout.NORTH, test, 5, SpringLayout.SOUTH, btnFont);
+        layout.putConstraint(SpringLayout.WEST, test, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.EAST, test, -5, SpringLayout.EAST, contentPane);
+
+        // mute
+        layout.putConstraint(SpringLayout.NORTH, mute, 5, SpringLayout.SOUTH, test);
+        layout.putConstraint(SpringLayout.EAST, mute, -5, SpringLayout.EAST, contentPane);
+
+        // lblQuery
+        layout.putConstraint(SpringLayout.WEST, lblQuery, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.BASELINE, lblQuery, 0, SpringLayout.BASELINE, mute);
+
+        // btnClear
+        layout.putConstraint(SpringLayout.NORTH, btnClear, 5, SpringLayout.SOUTH, mute);
+        layout.putConstraint(SpringLayout.EAST, btnClear, -5, SpringLayout.EAST, contentPane);
+
+        // query
+        layout.putConstraint(SpringLayout.NORTH, query, 5, SpringLayout.SOUTH, mute);
+        layout.putConstraint(SpringLayout.WEST, query, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.EAST, query, -5, SpringLayout.WEST, btnClear);
+
+        // lblAnswers
+        layout.putConstraint(SpringLayout.NORTH, lblAnswers, 5, SpringLayout.SOUTH, query);
+        layout.putConstraint(SpringLayout.WEST, lblAnswers, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.EAST, lblAnswers, -5, SpringLayout.EAST, contentPane);
+
+        // jScrollPane2
+        layout.putConstraint(SpringLayout.NORTH, jScrollPane2, 5, SpringLayout.SOUTH, lblAnswers);
+        layout.putConstraint(SpringLayout.WEST, jScrollPane2, 5, SpringLayout.WEST, contentPane);
+        layout.putConstraint(SpringLayout.EAST, jScrollPane2, -5, SpringLayout.EAST, contentPane);
+        layout.putConstraint(SpringLayout.SOUTH, jScrollPane2, -5, SpringLayout.SOUTH, contentPane);
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable answers;
-    private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnFont;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblAnswers;
-    private javax.swing.JLabel lblQuery;
-    private javax.swing.JLabel lblTest;
-    private javax.swing.JCheckBox mute;
-    private javax.swing.JTextField query;
-    private javax.swing.JComboBox<String> test;
-    private javax.swing.JComboBox<String> theme;
-    // End of variables declaration//GEN-END:variables
+    /**
+     * Overridden to trick sizing to respect the min.
+     */
+    @Override
+    public boolean isMinimumSizeSet() {
+        return true;
+    }
+
+
+    /**
+     * Overridden to adjust for insets if tricking.
+     */
+    @Override
+    public Dimension getMinimumSize() {
+        Dimension dim = super.getMinimumSize();
+        Insets insets = getInsets();
+
+        List<Integer> width = new ArrayList<>();
+        width.add(lblTest.getWidth() + theme.getWidth() + btnFont.getWidth() + 10);
+        width.add(test.getWidth() + 10);
+        width.add(lblQuery.getWidth() + mute.getWidth() + 5);
+        width.add(query.getWidth() + btnClear.getWidth() + 5);
+
+        dim.width += insets.left + insets.right + Collections.max(width);
+        dim.height += insets.bottom + insets.top + btnFont.getHeight() + btnClear.getHeight() + mute.getHeight() + lblAnswers.getHeight() + test.getHeight() + 150;
+
+        return dim;
+    }
 }
