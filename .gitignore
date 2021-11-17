@@ -23,11 +23,13 @@
 hs_err_pid*
 
 # gradle
-.gradle/*
-.vscode/*
-.idea/*
-.settings/*
-logs/*
-build/*
-dist/*
-bin/*
+.gradle
+.vscode
+.idea
+.settings
+logs
+build
+buildSrc/.gradle
+buildSrc/build
+dist
+bin
