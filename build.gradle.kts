@@ -5,9 +5,9 @@ import java.util.Date
 
 plugins {
     application
-    kotlin(Kotlin.jvmId) version Kotlin.version
-    kotlin(Kotlin.kaptId) version Kotlin.version
-    shadow(Shadow.id) version Shadow.version
+    kotlin("jvm") version "1.7.21"
+    kotlin("kapt") version "1.7.21"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 project.ext {
@@ -23,15 +23,18 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation(Kotlin.stdlibJdk8)
-    implementation(Slf4j.core)
-    implementation(Log4j.core)
-    implementation(Log4j.api)
-    implementation(Log4j.slf4j)
-    implementation(Kolod.FlatLookAndFeelfModel.core)
-    implementation(FontChooser.core)
-    implementation(SqLite.core)
-    implementation(Manifests.core)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.21")
+    implementation("org.slf4j:slf4j-log4j12:2.0.4")
+    implementation("org.apache.logging.log4j:log4j-core:2.19.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.19.0")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.19.0")
+    implementation("io.github.kolod:flatlaf-themes-combobox-model:1.1.1")
+    implementation("com.formdev:flatlaf:2.6")
+    implementation("com.formdev:flatlaf-extras:2.6")
+    implementation("com.formdev:flatlaf-intellij-themes:2.6")
+    implementation("org.drjekyll:fontchooser:2.5.2")
+    implementation("org.xerial:sqlite-jdbc:3.39.4.1")
+    implementation("com.jcabi:jcabi-manifests:1.2.1")
 }
 
 application {
@@ -61,6 +64,7 @@ tasks.named<ShadowJar>("shadowJar") {
 }
 
 tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes["Implementation-Title"] = "TestCheater"
         attributes["Main-Class"] = project.ext["mainClassName"] as String

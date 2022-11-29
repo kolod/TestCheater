@@ -15,20 +15,15 @@
 // along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 package io.github.kolod
 
+import com.formdev.flatlaf.extras.FlatSVGUtils
 import com.jcabi.manifests.Manifests
-import javafx.embed.swing.JFXPanel
-import javafx.scene.media.Media
-import javafx.scene.media.MediaPlayer
 import org.apache.logging.log4j.LogManager
 import org.drjekyll.fontchooser.FontDialog
 import java.awt.Dimension
 import java.awt.Font
-import java.awt.Toolkit
-import java.awt.event.ActionEvent
 import java.awt.event.ItemEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
-import java.net.URL
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -43,8 +38,10 @@ import javax.swing.table.DefaultTableModel
 class TestCheater : JFrame() {
     private val logger = LogManager.getLogger()
     private val themesModel = FlatlafThemesComboBoxModel()
+    private val answersModel = DefaultTableModel()
     private val prefs = Preferences.userNodeForPackage(TestCheater::class.java)
     private var conn: Connection? = null
+    private val buzz = Sound("/buzzer.wav")
 
     // UI
     private val bundle = ResourceBundle.getBundle("i18n/TestCheater")
@@ -55,18 +52,18 @@ class TestCheater : JFrame() {
     private val query = JTextField()
     private val lblAnswers = JLabel()
     private val jScrollPane2 = JScrollPane()
-    private val answers = JTable()
+    private val answers = JTable(answersModel)
     private val btnClear = JButton()
     private val mute = JCheckBox()
-    private val theme = JComboBox<String>()
-    private val fxPanel = JFXPanel() // Init JavaFX
+    private val volume = JSlider()
+    private val theme = JComboBox<String>(themesModel)
 
     /**
      * Connect to the sqlite database
      */
     private fun connect() {
         try {
-            val url = "jdbc:sqlite::resource:io/github/kolod/tests.sqlite" // db parameters
+            val url = "jdbc:sqlite::resource:tests.sqlite" // db parameters
             conn = DriverManager.getConnection(url) // create a connection to the database
             logger.info("Connection to SQLite has been established.")
         } catch (ex: SQLException) {
@@ -80,17 +77,6 @@ class TestCheater : JFrame() {
     private fun setCustomFont(font: Font) {
         UIManager.put("defaultFont", font)
         getWindows().forEach { window -> SwingUtilities.updateComponentTreeUI(window) }
-    }
-
-    /**
-     *
-     */
-    private fun buzzer() {
-        val url: URL? = javaClass.getResource("buzzer.wav")
-        val buzzer = Media(url?.toExternalForm())
-        val mediaPlayer = MediaPlayer(buzzer)
-        mediaPlayer.volume = 0.05
-        mediaPlayer.play()
     }
 
     /**
@@ -164,7 +150,7 @@ class TestCheater : JFrame() {
             }
         }
         if (answersModel.rowCount == 0) {
-            buzzer()
+            buzz.play()
         }
         answersModel.fireTableDataChanged()
     }
@@ -190,79 +176,144 @@ class TestCheater : JFrame() {
      */
     private fun initComponents() {
         defaultCloseOperation = EXIT_ON_CLOSE
-        iconImage = Toolkit.getDefaultToolkit().getImage(javaClass.classLoader.getResource("io/github/kolod/icon.png"))
+        iconImages = FlatSVGUtils.createWindowIconImages("/icon.svg")
         translateUI()
-
-        theme.model = themesModel
 
         jScrollPane2.setViewportView(answers)
         test.accessibleContext.accessibleName = ""
         mute.horizontalTextPosition = SwingConstants.LEADING
 
-        val layout = SpringLayout()
-        val contentPane = contentPane
-        contentPane.layout = layout
-        contentPane.add(lblTest)
-        contentPane.add(test)
-        contentPane.add(lblQuery)
-        contentPane.add(btnFont)
-        contentPane.add(query)
-        contentPane.add(lblAnswers)
-        contentPane.add(jScrollPane2)
-        contentPane.add(btnClear)
-        contentPane.add(mute)
-        contentPane.add(theme)
+        volume.minimum = 0
+        volume.maximum = 100
+        volume.value = prefs.getInt("Volume", 10)
 
-        // labelTest
-        layout.putConstraint(SpringLayout.WEST, lblTest, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.BASELINE, lblTest, 0, SpringLayout.BASELINE, btnFont)
+        // Show maximized
+        extendedState = extendedState or MAXIMIZED_BOTH
 
-        // btnFont
-        layout.putConstraint(SpringLayout.NORTH, btnFont, 5, SpringLayout.NORTH, contentPane)
-        layout.putConstraint(SpringLayout.EAST, btnFont, -5, SpringLayout.EAST, contentPane)
-        layout.putConstraint(SpringLayout.WEST, btnFont, 0, SpringLayout.WEST, btnClear)
+        // Customize JTable
+        answersModel.addColumn(bundle.getString("column_question"))
+        answersModel.addColumn(bundle.getString("column_answer"))
 
-        // theme
-        layout.putConstraint(SpringLayout.NORTH, theme, 5, SpringLayout.NORTH, contentPane)
-        layout.putConstraint(SpringLayout.EAST, theme, -5, SpringLayout.WEST, btnFont)
+        answers.columnModel.getColumn(0).cellRenderer = WordWrapCellRenderer()
+        answers.columnModel.getColumn(1).cellRenderer = WordWrapCellRenderer()
 
-        // test
-        layout.putConstraint(SpringLayout.NORTH, test, 5, SpringLayout.SOUTH, btnFont)
-        layout.putConstraint(SpringLayout.WEST, test, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.EAST, test, -5, SpringLayout.EAST, contentPane)
+        SpringLayout().apply {
+            contentPane.apply {
+                add(lblTest)
+                add(test)
+                add(lblQuery)
+                add(btnFont)
+                add(query)
+                add(lblAnswers)
+                add(jScrollPane2)
+                add(btnClear)
+                add(mute)
+                add(volume)
+                add(theme)
+            }.layout = this
 
-        // mute
-        layout.putConstraint(SpringLayout.NORTH, mute, 5, SpringLayout.SOUTH, test)
-        layout.putConstraint(SpringLayout.EAST, mute, -5, SpringLayout.EAST, contentPane)
+            // labelTest
+            putConstraint(SpringLayout.WEST, lblTest, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.BASELINE, lblTest, 0, SpringLayout.BASELINE, btnFont)
 
-        // lblQuery
-        layout.putConstraint(SpringLayout.WEST, lblQuery, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.BASELINE, lblQuery, 0, SpringLayout.BASELINE, mute)
+            // btnFont
+            putConstraint(SpringLayout.NORTH, btnFont, 5, SpringLayout.NORTH, contentPane)
+            putConstraint(SpringLayout.EAST, btnFont, -5, SpringLayout.EAST, contentPane)
+            putConstraint(SpringLayout.WEST, btnFont, 0, SpringLayout.WEST, btnClear)
 
-        // btnClear
-        layout.putConstraint(SpringLayout.NORTH, btnClear, 5, SpringLayout.SOUTH, mute)
-        layout.putConstraint(SpringLayout.EAST, btnClear, -5, SpringLayout.EAST, contentPane)
+            // theme
+            putConstraint(SpringLayout.NORTH, theme, 5, SpringLayout.NORTH, contentPane)
+            putConstraint(SpringLayout.EAST, theme, -5, SpringLayout.WEST, btnFont)
 
-        // query
-        layout.putConstraint(SpringLayout.NORTH, query, 5, SpringLayout.SOUTH, mute)
-        layout.putConstraint(SpringLayout.WEST, query, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.EAST, query, -5, SpringLayout.WEST, btnClear)
+            // test
+            putConstraint(SpringLayout.NORTH, test, 5, SpringLayout.SOUTH, btnFont)
+            putConstraint(SpringLayout.WEST, test, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.EAST, test, -5, SpringLayout.EAST, contentPane)
 
-        // lblAnswers
-        layout.putConstraint(SpringLayout.NORTH, lblAnswers, 5, SpringLayout.SOUTH, query)
-        layout.putConstraint(SpringLayout.WEST, lblAnswers, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.EAST, lblAnswers, -5, SpringLayout.EAST, contentPane)
+            // volume
+            putConstraint(SpringLayout.NORTH, volume, 5, SpringLayout.SOUTH, test)
+            putConstraint(SpringLayout.EAST, volume, -5, SpringLayout.EAST, contentPane)
 
-        // jScrollPane2
-        layout.putConstraint(SpringLayout.NORTH, jScrollPane2, 5, SpringLayout.SOUTH, lblAnswers)
-        layout.putConstraint(SpringLayout.WEST, jScrollPane2, 5, SpringLayout.WEST, contentPane)
-        layout.putConstraint(SpringLayout.EAST, jScrollPane2, -5, SpringLayout.EAST, contentPane)
-        layout.putConstraint(SpringLayout.SOUTH, jScrollPane2, -5, SpringLayout.SOUTH, contentPane)
+            // mute
+            putConstraint(SpringLayout.NORTH, mute, 5, SpringLayout.SOUTH, test)
+            putConstraint(SpringLayout.EAST, mute, -5, SpringLayout.WEST, volume)
+
+            // lblQuery
+            putConstraint(SpringLayout.WEST, lblQuery, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.BASELINE, lblQuery, 0, SpringLayout.BASELINE, mute)
+
+            // btnClear
+            putConstraint(SpringLayout.NORTH, btnClear, 5, SpringLayout.SOUTH, mute)
+            putConstraint(SpringLayout.EAST, btnClear, -5, SpringLayout.EAST, contentPane)
+
+            // query
+            putConstraint(SpringLayout.NORTH, query, 5, SpringLayout.SOUTH, mute)
+            putConstraint(SpringLayout.WEST, query, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.EAST, query, -5, SpringLayout.WEST, btnClear)
+
+            // lblAnswers
+            putConstraint(SpringLayout.NORTH, lblAnswers, 5, SpringLayout.SOUTH, query)
+            putConstraint(SpringLayout.WEST, lblAnswers, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.EAST, lblAnswers, -5, SpringLayout.EAST, contentPane)
+
+            // jScrollPane2
+            putConstraint(SpringLayout.NORTH, jScrollPane2, 5, SpringLayout.SOUTH, lblAnswers)
+            putConstraint(SpringLayout.WEST, jScrollPane2, 5, SpringLayout.WEST, contentPane)
+            putConstraint(SpringLayout.EAST, jScrollPane2, -5, SpringLayout.EAST, contentPane)
+            putConstraint(SpringLayout.SOUTH, jScrollPane2, -5, SpringLayout.SOUTH, contentPane)
+        }
+
+        addWindowListener(object : WindowAdapter() {
+            override fun windowClosing(evt: WindowEvent) {
+                try {
+                    val font = UIManager.getFont("defaultFont")
+
+                    prefs.put("FontName", font.fontName)
+                    prefs.putInt("FontSize", font.size)
+                    prefs.putInt("FontStyle", font.style)
+                    prefs.putInt("Volume", volume.value)
+                    prefs.flush()
+
+                    conn?.close()
+                } catch (ex: SQLException) {
+                    logger.error(ex.message, ex)
+                }
+            }
+        })
+
+        btnClear.addActionListener {
+            query.text = ""
+            query.requestFocus()
+        }
+
+        theme.addActionListener {
+            val themeName = theme.selectedItem
+            if (themeName is String) prefs.put("theme", themeName)
+        }
+
+        test.addItemListener { e: ItemEvent ->
+            if (e.stateChange == ItemEvent.SELECTED) updateAnswers()
+        }
+
+        volume.addChangeListener { slider ->
+            (slider.source as? JSlider)?.let {
+                Sound.volume = it.value
+            }
+        }
+
+        btnFont.addActionListener {
+            val dialog = FontDialog(this, bundle.getString("title_choose_font"), true)
+            dialog.selectedFont = btnFont.font
+            dialog.setLocationRelativeTo(this)
+            dialog.isVisible = true
+            if (!dialog.isCancelSelected) setCustomFont(dialog.selectedFont)
+        }
+
+        //theme.selectedItem = "Arc"
+        theme.selectedItem = prefs["theme", "Flat Light"] // Restore theme
+
         pack()
         setLocationRelativeTo(null)
-
-        theme.selectedItem = "Arc"
-        theme.selectedItem = prefs["theme", "Flat Light"] // Restore theme
     }
 
     /**
@@ -277,7 +328,7 @@ class TestCheater : JFrame() {
         width = insets.left + insets.right + (arrayOf (
             lblTest.width + theme.width + btnFont.width + 10,
             test.width + 10,
-            lblQuery.width + mute.width + 5,
+            lblQuery.width + mute.width + volume.width + 10,
             query.width + btnClear.width + 5
         ).maxOrNull() ?: 0)
 
@@ -289,7 +340,6 @@ class TestCheater : JFrame() {
      * Creates new form TestCheater
      */
     init {
-
         // Restore font
         setCustomFont(
             Font(
@@ -302,70 +352,14 @@ class TestCheater : JFrame() {
         // Init components generated from form file
         initComponents()
 
-        // Show maximized
-        extendedState = extendedState or MAXIMIZED_BOTH
-
-        // Customize JTable
-        val answersModel = DefaultTableModel()
-        answersModel.addColumn(bundle.getString("column_question"))
-        answersModel.addColumn(bundle.getString("column_answer"))
-        answers.model = answersModel
-        answers.columnModel.getColumn(0).cellRenderer = WordWrapCellRenderer()
-        answers.columnModel.getColumn(1).cellRenderer = WordWrapCellRenderer()
-
         // Main logic
         connect()
         updateTestsList()
         updateAnswers()
         setRussianKeyboardLayout()
 
-        addWindowListener(object : WindowAdapter() {
-            override fun windowClosing(evt: WindowEvent) {
-                try {
-                    conn!!.close()
-                } catch (ex: SQLException) {
-                    logger.catching(ex)
-                }
-            }
-        })
-
-        theme.addActionListener {
-            val themeName = theme.selectedItem
-            if (themeName is String) prefs.put("theme", themeName)
-        }
-
-        test.addItemListener { e: ItemEvent ->
-            if (e.stateChange == ItemEvent.SELECTED) updateAnswers()
-        }
-
-        val clearAction: Action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent) {
-                query.text = ""
-                query.requestFocus()
-            }
-        }
-
-        btnClear.addActionListener(clearAction)
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(112, 0, false), "Clear")
-        getRootPane().actionMap.put("Clear", clearAction)
-
-        btnFont.addActionListener {
-            val dialog = FontDialog(this, bundle.getString("title_choose_font"), true)
-            dialog.selectedFont = btnFont.font
-            dialog.setLocationRelativeTo(this)
-            dialog.isVisible = true
-            if (!dialog.isCancelSelected) try {
-                with (dialog.selectedFont) {
-                    setCustomFont(this)
-                    prefs.put("FontName", fontName)
-                    prefs.putInt("FontSize", size)
-                    prefs.putInt("FontStyle", style)
-                    prefs.flush()
-                }
-            } catch (ex: BackingStoreException) {
-                logger.catching(ex)
-            }
-        }
+        //getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(112, 0, false), "Clear")
+        //getRootPane().actionMap.put("Clear", clearAction)
 
         query.requestFocus()
         query.document.addDocumentListener(object : DocumentListener {
