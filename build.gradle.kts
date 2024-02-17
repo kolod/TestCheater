@@ -5,9 +5,9 @@ import java.util.Date
 
 plugins {
     application
-    kotlin("jvm") version "1.7.21"
-    kotlin("kapt") version "1.7.21"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    kotlin("jvm") version "1.9.20"
+    kotlin("kapt") version "1.9.20"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 project.ext {
@@ -23,18 +23,18 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.21")
-    implementation("org.slf4j:slf4j-log4j12:2.0.4")
-    implementation("org.apache.logging.log4j:log4j-core:2.19.0")
-    implementation("org.apache.logging.log4j:log4j-api:2.19.0")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.19.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.20")
+    implementation("org.slf4j:slf4j-log4j12:2.0.12")
+    implementation("org.apache.logging.log4j:log4j-core:2.22.1")
+    implementation("org.apache.logging.log4j:log4j-api:2.22.1")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.22.1")
     implementation("io.github.kolod:flatlaf-themes-combobox-model:1.1.1")
-    implementation("com.formdev:flatlaf:2.6")
-    implementation("com.formdev:flatlaf-extras:2.6")
-    implementation("com.formdev:flatlaf-intellij-themes:2.6")
+    implementation("com.formdev:flatlaf:3.3")
+    implementation("com.formdev:flatlaf-extras:3.3")
+    implementation("com.formdev:flatlaf-intellij-themes:3.3")
     implementation("org.drjekyll:fontchooser:2.5.2")
-    implementation("org.xerial:sqlite-jdbc:3.39.4.1")
-    implementation("com.jcabi:jcabi-manifests:1.2.1")
+    implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+    implementation("com.jcabi:jcabi-manifests:2.1.0")
 }
 
 application {
