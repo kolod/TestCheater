@@ -94,9 +94,9 @@ dependencyCheck {
     failBuildOnCVSS = 7.0f
     
     // Enable NVD API with your API key
-    nvdApiKey = System.getenv("NVD_API_KEY") ?: ""
-    nvdApiDelay = 4000
-    
+    nvd.apiKey = System.getenv("NVD_API_KEY") ?: ""
+    nvd.delay = 4000
+
     // Enable auto-update with NVD API
     autoUpdate = true
 }
