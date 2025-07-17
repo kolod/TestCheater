@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("kapt") version "2.2.0"
     id("com.gradleup.shadow") version "8.3.8"
+    id("org.owasp.dependencycheck") version "9.0.7"
 }
 
 project.ext {
