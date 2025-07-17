@@ -85,7 +85,7 @@ tasks {
 // OWASP Dependency Check configuration
 dependencyCheck {
     // Format for the dependency check report
-    format = "HTML"
+    formats = listOf("HTML")
     
     // Suppress false positives (optional - can be configured as needed)
     suppressionFile = "dependency-check-suppressions.xml"
@@ -93,28 +93,10 @@ dependencyCheck {
     // Fail build on CVSS score of 7 or higher (High/Critical vulnerabilities)
     failBuildOnCVSS = 7.0f
     
-    // Auto-update vulnerability database (good for CI but can be slow)
-    autoUpdate = true
-
     // Enable NVD API with your API key
-    nvd {
-        enabled = true
-        apiKey = System.getenv("NVD_API_KEY") ?: ""
-        // Delay between requests to respect rate limits
-        delay = 4000
-    }
-
-    // Use all available vulnerability sources
-    ossIndex {
-        enabled = true
-    }
+    nvdApiKey = System.getenv("NVD_API_KEY") ?: ""
+    nvdApiDelay = 4000
     
-    retirejs {
-        enabled = true
-    }
-    
-    // Enable known exploited vulnerabilities (KEV)
-    kev {
-        enabled = true
-    }
+    // Enable auto-update with NVD API
+    autoUpdate = true
 }
