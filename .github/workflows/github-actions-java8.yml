@@ -56,6 +56,7 @@ jobs:
         with:
           java-version: "8"
           distribution: "zulu"
+          check-latest: true  # Get the latest Java 8 patch version
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
@@ -63,6 +64,21 @@ jobs:
       - name: Make Gradle wrapper executable
         if: runner.os != 'Windows'
         run: chmod +x ./gradlew
+
+      - name: Run OWASP dependency check
+        if: matrix.os == 'windows-latest'  # Only run on one platform
+        run: ./gradlew dependencyCheckAnalyze --no-daemon --stacktrace --continue
+        continue-on-error: true  # Don't fail the build if dependency check has issues
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+      - name: Upload dependency check report
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'windows-latest'  # Only upload from one platform
+        with:
+          name: dependency-check-report
+          path: build/reports/dependency-check-report.html
+          retention-days: 30
 
       - name: Build with Gradle
         run: ./gradlew buildShadow --no-daemon --stacktrace

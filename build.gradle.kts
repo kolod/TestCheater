@@ -81,3 +81,22 @@ tasks {
         dependsOn(shadowJar)
     }
 }
+
+// OWASP Dependency Check configuration
+dependencyCheck {
+    // Format for the dependency check report
+    formats = listOf("HTML")
+    
+    // Suppress false positives (optional - can be configured as needed)
+    suppressionFile = "dependency-check-suppressions.xml"
+    
+    // Fail build on CVSS score of 7 or higher (High/Critical vulnerabilities)
+    failBuildOnCVSS = 7.0f
+    
+    // Enable NVD API with your API key
+    nvd.apiKey = System.getenv("NVD_API_KEY") ?: ""
+    nvd.delay = 4000
+
+    // Enable auto-update with NVD API
+    autoUpdate = true
+}
