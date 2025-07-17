@@ -81,3 +81,18 @@ tasks {
         dependsOn(shadowJar)
     }
 }
+
+// OWASP Dependency Check configuration
+dependencyCheck {
+    // Format for the dependency check report
+    format = "HTML"
+    
+    // Suppress false positives (optional - can be configured as needed)
+    suppressionFile = "dependency-check-suppressions.xml"
+    
+    // Fail build on CVSS score of 7 or higher (High/Critical vulnerabilities)
+    failBuildOnCVSS = 7.0f
+    
+    // Auto-update vulnerability database (good for CI but can be slow)
+    autoUpdate = true
+}
