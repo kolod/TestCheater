@@ -95,4 +95,26 @@ dependencyCheck {
     
     // Auto-update vulnerability database (good for CI but can be slow)
     autoUpdate = true
+
+    // Enable NVD API with your API key
+    nvd {
+        enabled = true
+        apiKey = System.getenv("NVD_API_KEY") ?: ""
+        // Delay between requests to respect rate limits
+        delay = 4000
+    }
+
+    // Use all available vulnerability sources
+    ossIndex {
+        enabled = true
+    }
+    
+    retirejs {
+        enabled = true
+    }
+    
+    // Enable known exploited vulnerabilities (KEV)
+    kev {
+        enabled = true
+    }
 }
