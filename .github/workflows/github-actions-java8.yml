@@ -56,7 +56,6 @@ jobs:
         with:
           java-version: "8"
           distribution: "adopt"
-          gradle-home-cache-cleanup: true
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
