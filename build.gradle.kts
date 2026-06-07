@@ -5,10 +5,10 @@ import java.util.Date
 
 plugins {
     application
-    kotlin("jvm") version "2.2.0"
-    kotlin("kapt") version "2.2.0"
+    kotlin("jvm") version "2.4.0"
+    kotlin("kapt") version "2.4.0"
     id("com.gradleup.shadow") version "8.3.8"
-    id("org.owasp.dependencycheck") version "9.0.7"
+    id("org.owasp.dependencycheck") version "12.2.2"
 }
 
 project.ext {
@@ -24,18 +24,18 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0")
-    implementation("org.slf4j:slf4j-log4j12:2.0.17")
-    implementation("org.apache.logging.log4j:log4j-core:2.25.1")
-    implementation("org.apache.logging.log4j:log4j-api:2.25.1")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.25.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.4.0")
+    implementation("org.slf4j:slf4j-log4j12:2.0.18")
+    implementation("org.apache.logging.log4j:log4j-core:2.26.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.26.0")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.26.0")
     implementation("io.github.kolod:flatlaf-themes-combobox-model:1.1.1")
-    implementation("com.formdev:flatlaf:3.6.1")
-    implementation("com.formdev:flatlaf-extras:3.6.1")
-    implementation("com.formdev:flatlaf-intellij-themes:3.6.1")
+    implementation("com.formdev:flatlaf:3.7.1")
+    implementation("com.formdev:flatlaf-extras:3.7.1")
+    implementation("com.formdev:flatlaf-intellij-themes:3.7.1")
     implementation("org.drjekyll:fontchooser:3.1.0")
-    implementation("org.xerial:sqlite-jdbc:3.50.2.0")
-    implementation("com.jcabi:jcabi-manifests:2.1.0")
+    implementation("org.xerial:sqlite-jdbc:3.53.2.0")
+    implementation("com.jcabi:jcabi-manifests:2.2.0")
 }
 
 application {
@@ -74,6 +74,10 @@ tasks.withType<Jar> {
     }
     // here zip stuff found in runtimeClasspath:
     from(configurations.runtimeClasspath.get().map {if (it.isDirectory) it else zipTree(it)})
+}
+
+dependencyCheck {
+    nvd.apiKey = System.getenv("NVD_API_KEY") ?: ""
 }
 
 tasks {
