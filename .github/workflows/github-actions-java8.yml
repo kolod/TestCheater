@@ -67,7 +67,7 @@ jobs:
 
       - name: Run OWASP dependency check
         if: matrix.os == 'windows-latest'  # Only run on one platform
-        run: ./gradlew dependencyCheckAnalyze --no-daemon --stacktrace --continue
+        run: ./gradlew dependencyCheckAnalyze --no-daemon --stacktrace
         continue-on-error: true  # Don't fail the build if dependency check has issues
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
